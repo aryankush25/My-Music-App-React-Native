@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {Text, TextInput, View, Button, SafeAreaView} from 'react-native';
-import Touchables from './Touchables';
+import React from 'react';
+import {Provider} from 'react-redux';
+import store from './store';
+import Components from './components';
 
-const App = () => {
+const Javascript = () => {
   return (
-    <React.Fragment>
-      <SafeAreaView />
-      <Touchables />
-    </React.Fragment>
+    <Provider store={store}>
+      <Components />
+    </Provider>
   );
 };
 
-export default App;
+export default Javascript;
