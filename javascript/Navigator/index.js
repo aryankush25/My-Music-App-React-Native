@@ -1,14 +1,18 @@
-import React, {Fragment} from 'react';
-import { View, Text } from "react-native";
+import React from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-const Navigator = () => {
-  return (
-    <View>
-      <Text>
-        Hello Aryan
-      </Text>
-    </View>
-  );
-};
+import HomeScreen from './HomeScreen';
+import DetailsScreen from './DetailsScreen.js';
 
-export default Navigator;
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+  {
+    initialRouteName: 'Home',
+  },
+);
+
+export default createAppContainer(AppNavigator);
