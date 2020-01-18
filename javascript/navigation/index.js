@@ -2,6 +2,8 @@ import React, {Fragment} from 'react';
 import {Button, Dimensions, SafeAreaView, Text, View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import styled, {css} from 'styled-components';
+import Navigator from "./Navigator"
+
 
 var {height, width} = Dimensions.get('window');
 
@@ -29,16 +31,7 @@ const Components = () => {
   const dispatch = useDispatch();
 
   return (
-    <Container backgroundColor="blue">
-      <SafeAreaView />
-      <Container>
-        <Title>Styled Components</Title>
-        <Button
-          title="Login"
-          onPress={() => dispatch({type: 'LOGIN', trueFalse: true})}
-        />
-      </Container>
-    </Container>
+      <Navigator />
   );
 };
 
