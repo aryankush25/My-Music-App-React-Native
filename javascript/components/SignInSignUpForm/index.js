@@ -29,12 +29,13 @@ const SignInSignUpForm = props => {
         labelImage={defineObject.header.labelImage}
       />
       <Form
-        handleSubmit={props.handleSubmit}
+        disabled={props.submitting || !props.valid}
         fields={defineObject.form.fields}
         buttonLabel={defineObject.form.buttonLabel}
         buttonColor={defineObject.form.buttonColor}
         buttonWidth={defineObject.form.buttonWidth}
         forgotPassword={defineObject.form.forgotPassword}
+        handleSubmit={props.handleSubmit}
         onClickForgotPassword={props.onClickForgotPassword}
       />
       <Footer />

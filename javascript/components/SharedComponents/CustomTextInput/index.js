@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View, TextInput, Text} from 'react-native';
 import styled from 'styled-components';
 
 const MyTextInputWrapper = styled(View)`
@@ -16,20 +16,41 @@ const TextInputWrapper = styled(TextInput)`
   font-size: 18;
 `;
 
-const MyTextInput = props => {
-  const {input, ...inputProps} = props;
+const Errors = styled(View)`
+  width: 100%;
+  align-items: flex-end;
+`;
 
+const ErrorMessage = styled(Text)`
+  color: red;
+  font-size: 14;
+`;
+
+const MyTextInput = ({
+  input,
+  label,
+  type,
+  meta: {touched, error, warning},
+  ...inputProps
+}) => {
   return (
-    <MyTextInputWrapper>
-      <TextInputWrapper
-        {...inputProps}
-        onChangeText={input.onChange}
-        onBlur={input.onBlur}
-        onFocus={input.onFocus}
-        value={input.value}
-        placeholderTextColor="#bfbfbf"
-      />
-    </MyTextInputWrapper>
+    <React.Fragment>
+      <MyTextInputWrapper>
+        <TextInputWrapper
+          {...inputProps}
+          onChangeText={input.onChange}
+          onBlur={input.onBlur}
+          onFocus={input.onFocus}
+          value={input.value}
+          placeholderTextColor="#bfbfbf"
+        />
+      </MyTextInputWrapper>
+      <Errors>
+        {touched &&
+          ((error && <ErrorMessage>{error}</ErrorMessage>) ||
+            (warning && <ErrorMessage>{warning}</ErrorMessage>))}
+      </Errors>
+    </React.Fragment>
   );
 };
 

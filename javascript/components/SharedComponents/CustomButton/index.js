@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const ButtonWrapper = styled(View)`
   padding-top: 40;
@@ -14,6 +14,11 @@ const TextWrapper = styled(View)`
   height: 50;
   align-items: center;
   border-radius: 50px;
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.3;
+    `}
 `;
 
 const ButtonText = styled(Text)`
@@ -26,8 +31,11 @@ const ButtonText = styled(Text)`
 const CustomButton = props => {
   return (
     <ButtonWrapper>
-      <TouchableOpacity onPress={props.onPress}>
-        <TextWrapper color={props.color} width={props.width}>
+      <TouchableOpacity disabled={props.disabled} onPress={props.onPress}>
+        <TextWrapper
+          color={props.color}
+          width={props.width}
+          disabled={props.disabled}>
           <ButtonText>{props.label}</ButtonText>
         </TextWrapper>
       </TouchableOpacity>

@@ -30,6 +30,7 @@ const Form = props => {
           component={field.component}
           placeholder={field.placeholder}
           secureTextEntry={field.secureTextEntry}
+          validate={field.validate}
         />
       ))}
       <Button
@@ -37,6 +38,7 @@ const Form = props => {
         label={props.buttonLabel}
         color={props.buttonColor}
         width={props.buttonWidth}
+        disabled={props.disabled}
       />
       {props.forgotPassword && (
         <ForgotPasswordContainer onPress={props.onClickForgotPassword}>
