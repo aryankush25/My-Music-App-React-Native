@@ -1,15 +1,16 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import SignInScreen from './SignInScreen';
+import SignUpScreen from './SignUpScreen';
 
-import HomeScreen from './HomeScreen';
-
-const AppNavigator = createStackNavigator(
+const AppNavigator = createBottomTabNavigator(
   {
-    Home: HomeScreen,
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'SignIn',
   },
 );
 
