@@ -1,12 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import store from './store';
-import Components from './components';
+import Navigator from './navigator';
 
 const Javascript = () => {
   return (
     <Provider store={store}>
-      <Components />
+      <Navigator />
     </Provider>
   );
 };
