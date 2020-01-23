@@ -1,8 +1,9 @@
 import React from 'react';
-import {SafeAreaView, Text, View, TextInput, StyleSheet} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import styled from 'styled-components';
+import musicAppLogo from '../../assets/images/music-app-icon.png';
 
-const HeaderFooterContainer = styled(View)`
+const FooterContainer = styled(View)`
   width: 80%;
   justify-content: center;
   align-items: center;
@@ -10,19 +11,24 @@ const HeaderFooterContainer = styled(View)`
   margin-bottom: 50px;
 `;
 
-const FooterContainerText = styled(Text)`
+const FooterImage = styled(Image)`
+  height: 70px;
+  width: 70px;
+  margin-bottom: 20px;
+`;
+
+const FooterText = styled(Text)`
   color: white;
   font-size: 20;
 `;
 
 const Footer = () => {
   return (
-    <HeaderFooterContainer>
-      <FooterContainerText>Agree to the</FooterContainerText>
-      <FooterContainerText>
-        Terms of Service & Privacy Policy
-      </FooterContainerText>
-    </HeaderFooterContainer>
+    <FooterContainer>
+      <FooterImage source={musicAppLogo} />
+      <FooterText>Agree to the</FooterText>
+      <FooterText>Terms of Service & Privacy Policy</FooterText>
+    </FooterContainer>
   );
 };
 export default Footer;

@@ -2,7 +2,11 @@ import React from 'react';
 import SignInSignUpForm from '../../components/SignInSignUpForm';
 
 const SignUpScreen = () => {
-  return <SignInSignUpForm />;
+  const onSubmitSignUp = values => {
+    console.log('SignUpScreen values', values);
+  };
+
+  return <SignInSignUpForm formFor="SignUp" onSubmit={onSubmitSignUp} />;
 };
 
 export default SignUpScreen;

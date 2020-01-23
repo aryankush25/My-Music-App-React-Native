@@ -6,8 +6,8 @@ const MyTextInputWrapper = styled(View)`
   width: 100%;
   border-bottom-width: 2;
   border-bottom-color: #bfbfbf;
-  padding: 10px 6px;
-  margin-bottom: 6px;
+  padding: 12px 6px;
+  margin-bottom: 10px;
 `;
 
 const TextInputWrapper = styled(TextInput)`

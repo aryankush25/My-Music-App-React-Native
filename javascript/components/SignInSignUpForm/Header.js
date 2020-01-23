@@ -1,25 +1,31 @@
 import React from 'react';
-import {SafeAreaView, Text, View, TextInput, StyleSheet} from 'react-native';
+import {Text, View} from 'react-native';
 import styled from 'styled-components';
 
-const HeaderFooterContainer = styled(View)`
+const HeaderContainer = styled(View)`
   width: 80%;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
   margin-bottom: 50px;
 `;
 
-const HeaderContainerText = styled(Text)`
+const TitleText = styled(Text)`
+  color: white;
+  font-size: 20;
+`;
+
+const HeaderText = styled(Text)`
   color: white;
   font-size: 36;
+  margin-top: 60px;
 `;
 
 const Header = () => {
   return (
-    <HeaderFooterContainer>
-      <HeaderContainerText>Account Registration</HeaderContainerText>
-    </HeaderFooterContainer>
+    <HeaderContainer>
+      <TitleText>Sign Up</TitleText>
+      <HeaderText>Account Registration</HeaderText>
+    </HeaderContainer>
   );
 };
 
