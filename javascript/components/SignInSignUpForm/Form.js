@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {Field} from 'redux-form';
 import styled from 'styled-components';
-import Button from '../InputComponents/CustomButton';
+import Button from '../SharedComponents/CustomButton';
 
 const SignInSignUpFormContainer = styled(View)`
   flex: 1;

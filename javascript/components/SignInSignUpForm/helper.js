@@ -1,4 +1,4 @@
-import MyTextInput from '../InputComponents/CustomTextInput';
+import MyTextInput from '../SharedComponents/CustomTextInput';
 import signInImage from '../../assets/images/signin-image.png';
 import signUpImage from '../../assets/images/signup-image.png';
 import musicAppLogo from '../../assets/images/music-app-icon.png';
