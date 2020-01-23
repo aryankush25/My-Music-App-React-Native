@@ -1,13 +1,11 @@
 import React from 'react';
-import {SafeAreaView, View, ImageBackground} from 'react-native';
-import {reduxForm, Field} from 'redux-form';
+import {SafeAreaView, ImageBackground} from 'react-native';
+import {reduxForm} from 'redux-form';
 import styled from 'styled-components';
 import Header from './Header';
+import Form from './Form';
 import Footer from './Footer';
-import Button from '../InputComponents/CustomButton';
-import {signInFields, signUpFields} from './helper.js';
-import signInImage from '../../assets/images/signin-image.png';
-import signUpImage from '../../assets/images/signup-image.png';
+import {signInObject, signUpObject} from './helper.js';
 
 const SignInSignUpFormWrapper = styled(ImageBackground)`
   flex: 1;
@@ -18,41 +16,27 @@ const SignInSignUpFormWrapper = styled(ImageBackground)`
   height: 100%;
 `;
 
-const SignInSignUpFormContainer = styled(View)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-`;
-
-const Form = props => {
-  return (
-    <SignInSignUpFormContainer>
-      {signUpFields.map(field => (
-        <Field
-          name={field.name}
-          component={field.component}
-          placeholder={field.placeholder}
-          secureTextEntry={field.secureTextEntry}
-        />
-      ))}
-      <Button
-        onPress={() => {
-          console.log('Clicked');
-        }}
-        label="Sign Up"
-      />
-    </SignInSignUpFormContainer>
-  );
-};
-
 const SignInSignUpForm = props => {
-  console.log('$$$$ props', props);
+  const isSignInForm = props.formFor === 'SignIn';
+  const defineObject = isSignInForm ? signInObject : signUpObject;
+
   return (
-    <SignInSignUpFormWrapper source={signUpImage}>
+    <SignInSignUpFormWrapper source={defineObject.bgImage}>
       <SafeAreaView />
-      <Header />
-      <Form />
+      <Header
+        title={defineObject.header.title}
+        label={defineObject.header.label}
+        labelImage={defineObject.header.labelImage}
+      />
+      <Form
+        handleSubmit={props.handleSubmit}
+        fields={defineObject.form.fields}
+        buttonLabel={defineObject.form.buttonLabel}
+        buttonColor={defineObject.form.buttonColor}
+        buttonWidth={defineObject.form.buttonWidth}
+        forgotPassword={defineObject.form.forgotPassword}
+        onClickForgotPassword={props.onClickForgotPassword}
+      />
       <Footer />
     </SignInSignUpFormWrapper>
   );

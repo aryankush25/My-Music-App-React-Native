@@ -7,13 +7,15 @@ const ButtonWrapper = styled(View)`
   align-items: center;
   width: 100%;
 `;
+
 const TextWrapper = styled(View)`
-  width: 300;
+  width: ${props => (props.width ? props.width : 300)};
+  background-color: ${props => (props.color ? props.color : '#fe2851')};
   height: 50;
   align-items: center;
-  background-color: #fe2851;
   border-radius: 50px;
 `;
+
 const ButtonText = styled(Text)`
   text-align: center;
   margin: auto;
@@ -25,7 +27,7 @@ const CustomButton = props => {
   return (
     <ButtonWrapper>
       <TouchableOpacity onPress={props.onPress}>
-        <TextWrapper>
+        <TextWrapper color={props.color} width={props.width}>
           <ButtonText>{props.label}</ButtonText>
         </TextWrapper>
       </TouchableOpacity>

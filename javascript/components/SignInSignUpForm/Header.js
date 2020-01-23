@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import styled from 'styled-components';
 
 const HeaderContainer = styled(View)`
@@ -12,19 +12,26 @@ const HeaderContainer = styled(View)`
 const TitleText = styled(Text)`
   color: white;
   font-size: 20;
+  margin-bottom: 80px;
 `;
 
-const HeaderText = styled(Text)`
+const LabelImage = styled(Image)`
+  height: 50px;
+  width: 50px;
+  margin-bottom: 20px;
+`;
+
+const LabelText = styled(Text)`
   color: white;
   font-size: 36;
-  margin-top: 60px;
 `;
 
-const Header = () => {
+const Header = props => {
   return (
     <HeaderContainer>
-      <TitleText>Sign Up</TitleText>
-      <HeaderText>Account Registration</HeaderText>
+      <TitleText>{props.title}</TitleText>
+      {props.labelImage && <LabelImage source={props.labelImage} />}
+      <LabelText>{props.label}</LabelText>
     </HeaderContainer>
   );
 };
