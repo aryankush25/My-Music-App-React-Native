@@ -22,7 +22,7 @@ npm start # To run metro bundler
 npx react-native run-ios # Start app in ios
 ```
 
-You can check docs for installation [Docs link](https://facebook.github.io/react-native/docs/getting-started)
+You can also check docs for installation [Docs link](https://facebook.github.io/react-native/docs/getting-started)
 
 
 ## Contributing
