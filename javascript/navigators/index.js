@@ -5,14 +5,14 @@ import {Icon} from 'react-native-elements';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 
-const AppNavigator = createBottomTabNavigator(
+const UnprotectedNavigators = createBottomTabNavigator(
   {
     'Sign In': SignInScreen,
     'Sign Up': SignUpScreen,
   },
   {
     defaultNavigationOptions: ({navigation}) => ({
-      tabBarIcon: ({focused, horizontal, tintColor}) => {
+      tabBarIcon: ({focused}) => {
         const {routeName} = navigation.state;
         let iconName;
         let iconColor = focused ? 'white' : 'grey';
@@ -38,4 +38,12 @@ const AppNavigator = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(AppNavigator);
+const appNavigator = () => {
+  const isLoggedIn = false;
+  if (!isLoggedIn) {
+    return UnprotectedNavigators;
+  }
+  return UnprotectedNavigators;
+};
+
+export default createAppContainer(appNavigator());
