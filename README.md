@@ -17,7 +17,7 @@ npm install # Install node modules
 
 cd ios && pod install && cd .. # Goto ios directory, install pods and go back to main project directory
 
-npm start # To run metro budler
+npm start # To run metro bundler
 
 npx react-native run-ios # Start app in ios
 ```
