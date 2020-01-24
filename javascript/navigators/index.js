@@ -1,49 +1,45 @@
-import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {Icon} from 'react-native-elements';
-import SignInScreen from './SignInScreen';
-import SignUpScreen from './SignUpScreen';
+import React, {useEffect} from 'react';
+import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {useSelector} from 'react-redux';
+import AuthNavigators from './AuthNavigators';
+import AppNavigators from './AppNavigators';
 
-const UnprotectedNavigators = createBottomTabNavigator(
-  {
-    'Sign In': SignInScreen,
-    'Sign Up': SignUpScreen,
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  {
-    defaultNavigationOptions: ({navigation}) => ({
-      tabBarIcon: ({focused}) => {
-        const {routeName} = navigation.state;
-        let iconName;
-        let iconColor = focused ? 'white' : 'grey';
-        if (routeName === 'Sign In') {
-          iconName = 'person';
-        } else if (routeName === 'Sign Up') {
-          iconName = 'person-add';
-        }
-        return <Icon name={iconName} color={iconColor} />;
-      },
-    }),
-    tabBarOptions: {
-      inactiveTintColor: 'gray',
-      activeTintColor: 'white',
-      labelStyle: {
-        fontSize: 14,
-      },
-      style: {
-        backgroundColor: '#14192D',
-        paddingTop: 4,
-      },
-    },
-  },
-);
+});
 
-const appNavigator = () => {
-  const isLoggedIn = false;
-  if (!isLoggedIn) {
-    return UnprotectedNavigators;
-  }
-  return UnprotectedNavigators;
+const InitialLoadingNavigator = props => {
+  const isLoggedIn = useSelector(state => state.authReducer.loggedIn);
+
+  checkSignedIn = async () => {
+    await setTimeout(() => {}, 3000);
+    props.navigation.navigate(isLoggedIn ? 'App' : 'Auth');
+  };
+
+  checkSignedIn();
+
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color="#0000ff" />
+      <StatusBar barStyle="default" />
+    </View>
+  );
 };
 
-export default createAppContainer(appNavigator());
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      InitialLoading: InitialLoadingNavigator,
+      Auth: AuthNavigators,
+      App: AppNavigators,
+    },
+    {
+      initialRouteName: 'InitialLoading',
+    },
+  ),
+);

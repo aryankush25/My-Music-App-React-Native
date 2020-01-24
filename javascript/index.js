@@ -1,13 +1,15 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import store from './store';
+import {useSelector} from 'react-redux';
 import Navigator from './navigators';
+import Loader from './components/SharedComponents/Loader';
 
 const Javascript = () => {
+  const isLoading = useSelector(state => state.loadingReducer.loading);
   return (
-    <Provider store={store}>
+    <React.Fragment>
+      <Loader loading={isLoading} />
       <Navigator />
-    </Provider>
+    </React.Fragment>
   );
 };
 
