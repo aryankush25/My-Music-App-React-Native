@@ -1,10 +1,8 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
 import SignInSignUpForm from '../../components/SignInSignUpForm';
 
-const SignInScreen = () => {
-  const onSubmitSignIn = values => {
-    console.log('SignInScreen values', values);
-  };
+const SignInScreen = props => {
   const onClickForgotPassword = values => {
     console.log('onClickForgotPassword', values);
   };
@@ -12,10 +10,16 @@ const SignInScreen = () => {
   return (
     <SignInSignUpForm
       formFor="SignIn"
-      onSubmit={onSubmitSignIn}
+      disabled={props.submitting || !props.valid}
+      handleSubmit={props.handleSubmit}
       onClickForgotPassword={onClickForgotPassword}
     />
   );
 };
 
-export default SignInScreen;
+export default reduxForm({
+  form: 'signInForm',
+  onSubmit: values => {
+    console.log('SignInScreen values', values);
+  },
+})(SignInScreen);

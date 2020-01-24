@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, ImageBackground} from 'react-native';
-import {reduxForm} from 'redux-form';
 import styled from 'styled-components';
 import Header from './Header';
 import Form from './Form';
@@ -29,7 +28,7 @@ const SignInSignUpForm = props => {
         labelImage={defineObject.header.labelImage}
       />
       <Form
-        disabled={props.submitting || !props.valid}
+        disabled={props.disabled}
         fields={defineObject.form.fields}
         buttonLabel={defineObject.form.buttonLabel}
         buttonColor={defineObject.form.buttonColor}
@@ -43,6 +42,4 @@ const SignInSignUpForm = props => {
   );
 };
 
-export default reduxForm({
-  form: 'signInSignUpForm',
-})(SignInSignUpForm);
+export default SignInSignUpForm;
