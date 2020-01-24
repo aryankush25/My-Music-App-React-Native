@@ -9,17 +9,17 @@ brew install watchman
 
 sudo gem install cocoapods
 
-Clone the project
+git clone https://github.com/aryankush25/My-Music-App-React-Native.git # Clone the project
 
-cd My-Music-App-React-Native
+cd My-Music-App-React-Native # Goto project directory
 
-npm install
+npm install # Install node modules
 
-cd ios && pod install && cd ..
+cd ios && pod install && cd .. # Goto ios directory, install pods and go back to main project directory
 
-npm start (You can skip this step)
+npm start # To run metro budler
 
-npx react-native run-ios
+npx react-native run-ios # Start app in ios
 ```
 
 You can check docs for installation [Docs link](https://facebook.github.io/react-native/docs/getting-started)
