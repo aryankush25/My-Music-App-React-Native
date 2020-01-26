@@ -1,5 +1,5 @@
 const initialState = {
-  loggedIn: false,
+  loggedIn: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const authReducer = (state = initialState, action) => {
         loggedIn: true,
       };
     }
-    case 'LOGOUT_REQUEST_SUCCESS': {
+    case 'LOGOUT_FAILURE': {
       return {
         ...state,
         loggedIn: false,

@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {useSelector} from 'react-redux';
+import {useDefaultAuth} from '../hooks/authHooks';
 import AuthNavigators from './AuthNavigators';
 import AppNavigators from './AppNavigators';
 
@@ -14,14 +14,17 @@ const styles = StyleSheet.create({
 });
 
 const InitialLoadingNavigator = props => {
-  const isLoggedIn = useSelector(state => state.authReducer.loggedIn);
+  const {isLoggedIn} = useDefaultAuth();
 
-  checkSignedIn = async () => {
-    await setTimeout(() => {}, 3000);
-    props.navigation.navigate(isLoggedIn ? 'App' : 'Auth');
-  };
+  const changeNavigator = useCallback(() => {
+    if (typeof isLoggedIn === 'boolean') {
+      props.navigation.navigate(isLoggedIn ? 'App' : 'Auth');
+    }
+  }, [isLoggedIn]);
 
-  checkSignedIn();
+  useEffect(() => {
+    changeNavigator();
+  }, [isLoggedIn]);
 
   return (
     <View style={styles.container}>
