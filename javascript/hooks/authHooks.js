@@ -1,4 +1,3 @@
-import * as R from 'ramda';
 import {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
