@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import styled from 'styled-components';
-import {useDefaultAuth} from '../hooks/authHooks';
+import {useDefaultAuth, useSwitchNavigation} from '../hooks/authHooks';
 import AuthNavigators from './AuthNavigators';
 import AppNavigators from './AppNavigators';
 
@@ -13,17 +13,8 @@ const InitialLoaderContainer = styled(View)`
 `;
 
 const InitialLoadingNavigator = props => {
-  const {isSignedIn} = useDefaultAuth();
-
-  const changeNavigator = useCallback(() => {
-    if (typeof isSignedIn === 'boolean') {
-      props.navigation.navigate(isSignedIn ? 'App' : 'Auth');
-    }
-  }, [isSignedIn]);
-
-  useEffect(() => {
-    changeNavigator();
-  }, [isSignedIn]);
+  useDefaultAuth();
+  useSwitchNavigation({navigation: props.navigation});
 
   return (
     <InitialLoaderContainer>

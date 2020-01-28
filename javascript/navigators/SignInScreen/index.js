@@ -1,8 +1,10 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 import SignInSignUpForm from '../../components/SignInSignUpForm';
+import {useSwitchNavigation} from '../../hooks/authHooks';
 
 const SignInScreen = props => {
+  useSwitchNavigation({navigation: props.navigation})
   const onClickForgotPassword = values => {
     console.log('onClickForgotPassword', values);
   };

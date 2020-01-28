@@ -14,7 +14,6 @@ export function* putSignUpRequest(action) {
   yield put({type: 'LOADING_START'});
 
   const {email, password} = action.values;
-
   try {
     yield firebase
       .auth()
@@ -31,7 +30,6 @@ export function* putSignUpRequest(action) {
     yield put({type: 'SIGN_UP_FAILURE'});
   }
 
-  console.log("outside try catch")
   yield put({type: 'LOADING_END'});
 }
 
