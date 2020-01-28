@@ -3,15 +3,16 @@ import {useDispatch, useSelector} from 'react-redux';
 
 export const useDefaultAuth = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.authReducer.loggedIn);
+  const isSignedIn = useSelector(state => state.authReducer.isSignedIn);
 
-  const fetchLoginData = useCallback(() => dispatch({type: 'LOGIN_REQUEST'}), [
-    dispatch,
-  ]);
+  const fetchSignInData = useCallback(
+    () => dispatch({type: 'SIGN_IN_REQUEST'}),
+    [dispatch],
+  );
 
   useEffect(() => {
-    fetchLoginData();
+    fetchSignInData();
   }, []);
 
-  return {isLoggedIn};
+  return {isSignedIn};
 };

@@ -20,6 +20,6 @@ const SignInScreen = props => {
 export default reduxForm({
   form: 'signInForm',
   onSubmit: (values, dispatch) => {
-    dispatch({type: 'LOGIN_REQUEST'});
+    dispatch({type: 'SIGN_IN_REQUEST'});
   },
 })(SignInScreen);

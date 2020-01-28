@@ -14,7 +14,7 @@ const SignUpScreen = props => {
 
 export default reduxForm({
   form: 'signUpForm',
-  onSubmit: values => {
-    console.log('SignUpScreen values', values);
+  onSubmit: async (values, dispatch) => {
+    dispatch({type: 'SIGN_UP_REQUEST', values})
   },
 })(SignUpScreen);

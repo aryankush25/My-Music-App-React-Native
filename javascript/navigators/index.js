@@ -13,17 +13,17 @@ const InitialLoaderContainer = styled(View)`
 `;
 
 const InitialLoadingNavigator = props => {
-  const {isLoggedIn} = useDefaultAuth();
+  const {isSignedIn} = useDefaultAuth();
 
   const changeNavigator = useCallback(() => {
-    if (typeof isLoggedIn === 'boolean') {
-      props.navigation.navigate(isLoggedIn ? 'App' : 'Auth');
+    if (typeof isSignedIn === 'boolean') {
+      props.navigation.navigate(isSignedIn ? 'App' : 'Auth');
     }
-  }, [isLoggedIn]);
+  }, [isSignedIn]);
 
   useEffect(() => {
     changeNavigator();
-  }, [isLoggedIn]);
+  }, [isSignedIn]);
 
   return (
     <InitialLoaderContainer>
