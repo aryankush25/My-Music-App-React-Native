@@ -1,6 +1,5 @@
 import {put, call, takeLatest} from 'redux-saga/effects';
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "firebase";
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -13,7 +12,7 @@ export function* putSignInRequest(action) {
 export function* putSignUpRequest(action) {
   yield put({type: 'LOADING_START'});
 
-  const {email, password} = action.values;
+  const {name, email, password} = action.values;
   try {
     yield firebase
       .auth()
@@ -21,10 +20,13 @@ export function* putSignUpRequest(action) {
 
     const user = yield firebase.auth().currentUser;
 
+    if (user) {
+      user.updateProfile({
+        displayName: name
+      })
+      yield put({type: 'SIGN_UP_SUCCESS'});
+    }
     console.log('$$$$ user', user);
-
-    yield put({type: 'SIGN_UP_SUCCESS'});
-
   } catch (error) {
     console.log('$$$$ error', error.toString());
     yield put({type: 'SIGN_UP_FAILURE'});
