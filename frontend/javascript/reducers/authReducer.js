@@ -4,6 +4,18 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_IS_SIGNED_IN_SUCCESS': {
+      return {
+        ...state,
+        isSignedIn: true,
+      };
+    }
+    case 'FETCH_IS_SIGNED_IN_FALIURE': {
+      return {
+        ...state,
+        isSignedIn: true,
+      };
+    }
     case 'SIGN_IN_SUCCESS': {
       return {
         ...state,
@@ -29,6 +41,12 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case 'SIGN_OUT_SUCCESS': {
+      return {
+        ...state,
+        isSignedIn: false,
+      };
+    }
+    case 'SIGN_OUT_FALIURE': {
       return {
         ...state,
         isSignedIn: false,

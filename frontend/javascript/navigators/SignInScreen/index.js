@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import SignInSignUpForm from '../../components/SignInSignUpForm';
-import { useSwitchNavigation } from '../../hooks/authHooks';
+import { useSwitchNavigation } from '../../hooks/navigationHooks';
 
 const SignInScreen = props => {
   useSwitchNavigation({ navigation: props.navigation });

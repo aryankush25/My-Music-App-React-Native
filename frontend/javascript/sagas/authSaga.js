@@ -3,9 +3,24 @@ import firebase from 'firebase';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+export function* putIsSignInRequest(action) {
+  try {
+    const user = yield firebase.auth().currentUser;
+    if (user) {
+      yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
+      console.log('$$$$ user', user);
+    } else {
+      yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
+    }
+  } catch (error) {
+    console.log('$$$$ error', error.toString());
+    yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
+  }
+}
+
 export function* putSignInRequest(action) {
   yield call(delay, 2000);
-  // yield put({type: 'SIGN_IN_SUCCESS'});
+  yield put({ type: 'SIGN_IN_SUCCESS' });
   yield put({ type: 'SIGN_IN_FAILURE' });
 }
 
@@ -34,6 +49,7 @@ export function* putSignUpRequest(action) {
 }
 
 export default [
+  takeLatest('FETCH_IS_SIGNED_IN_REQUEST', putIsSignInRequest),
   takeLatest('SIGN_IN_REQUEST', putSignInRequest),
   takeLatest('SIGN_UP_REQUEST', putSignUpRequest),
 ];
