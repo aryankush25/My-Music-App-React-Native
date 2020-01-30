@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Navigator from './navigators';
 import Loader from './components/SharedComponents/Loader';
 

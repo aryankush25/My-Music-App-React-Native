@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Modal, ActivityIndicator } from 'react-native';
 
 const Loader = props => {
-  const {loading, ...attributes} = props;
+  const { loading, ...attributes } = props;
 
   return (
     <Modal
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#00000040',
   },
   activityIndicatorWrapper: {
-    // backgroundColor: '#FFFFFF',
     height: 100,
     width: 100,
     borderRadius: 10,

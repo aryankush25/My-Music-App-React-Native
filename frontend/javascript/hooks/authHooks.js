@@ -1,13 +1,13 @@
-import {useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import * as R from 'ramda'
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as R from 'ramda';
 
 export const useDefaultAuth = () => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(state => state.authReducer.isSignedIn);
 
   const fetchSignInData = useCallback(
-    () => dispatch({type: 'SIGN_IN_REQUEST'}),
+    () => dispatch({ type: 'SIGN_IN_REQUEST' }),
     [dispatch],
   );
 
@@ -15,14 +15,14 @@ export const useDefaultAuth = () => {
     fetchSignInData();
   }, []);
 
-  return {isSignedIn};
+  return { isSignedIn };
 };
 
-export const useSwitchNavigation = ({navigation}) => {
+export const useSwitchNavigation = ({ navigation }) => {
   const isSignedIn = useSelector(state => state.authReducer.isSignedIn);
 
   const changeNavigator = useCallback(() => {
-    if (typeof isSignedIn === 'boolean' && navigation) {  
+    if (typeof isSignedIn === 'boolean' && navigation) {
       navigation.navigate(isSignedIn ? 'App' : 'Auth');
     }
   }, [isSignedIn, navigation]);
@@ -31,5 +31,5 @@ export const useSwitchNavigation = ({navigation}) => {
     changeNavigator();
   }, [isSignedIn]);
 
-  return {isSignedIn};
+  return { isSignedIn };
 };

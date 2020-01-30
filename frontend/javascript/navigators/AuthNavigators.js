@@ -1,6 +1,6 @@
 import React from 'react';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {Icon} from 'react-native-elements';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Icon } from 'react-native-elements';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 
@@ -10,9 +10,9 @@ const AuthNavigators = createBottomTabNavigator(
     'Sign Up': SignUpScreen,
   },
   {
-    defaultNavigationOptions: ({navigation}) => ({
-      tabBarIcon: ({focused}) => {
-        const {routeName} = navigation.state;
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
         let iconName;
         let iconColor = focused ? 'white' : 'grey';
         if (routeName === 'Sign In') {

@@ -2,7 +2,7 @@ import MyTextInput from '../SharedComponents/CustomTextInput';
 import signInImage from '../../assets/images/signin-image.png';
 import signUpImage from '../../assets/images/signup-image.png';
 import musicAppLogo from '../../assets/images/music-app-icon.png';
-import {required, email, minLength8} from '../../utils/validations';
+import { required, email, minLength8 } from '../../utils/validations';
 
 export const inputTypes = {
   name: {
