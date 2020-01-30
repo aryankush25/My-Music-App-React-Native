@@ -1,6 +1,6 @@
 # My-Music-App-React-Native
 
-> #### ***Note: Please do not use `npm` to manage dependencies. Use `yarn` instead. We use `yarn` because of better performance.***
+> #### ***Note: Please do not use `npm` to manage dependencies. Use `yarn`:heart: instead. We use `yarn` because of better performance.***
 
 ## Initial Setup
 
