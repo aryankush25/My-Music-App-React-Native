@@ -1,11 +1,9 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import firebase from 'firebase';
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+import { put, takeLatest } from 'redux-saga/effects';
+import services from '../services';
 
 export function* putIsSignInRequest(action) {
   try {
-    const user = yield firebase.auth().currentUser;
+    const user = yield services.auth.fetchCurrentUser();
     if (user) {
       yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
     } else {
@@ -24,9 +22,9 @@ export function* putSignInRequest(action) {
   const { email, password } = action.values;
 
   try {
-    yield firebase.auth().signInWithEmailAndPassword(email, password);
+    yield services.auth.signInUser(email, password);
 
-    const user = yield firebase.auth().currentUser;
+    const user = yield services.auth.fetchCurrentUser();
 
     if (user) {
       yield put({ type: 'SIGN_IN_SUCCESS' });
@@ -46,14 +44,9 @@ export function* putSignUpRequest(action) {
 
   const { name, email, password } = action.values;
   try {
-    yield firebase.auth().createUserWithEmailAndPassword(email, password);
-
-    const user = yield firebase.auth().currentUser;
+    const user = yield services.auth.signUpUser(name, email, password);
 
     if (user) {
-      yield user.updateProfile({
-        displayName: name,
-      });
       yield put({ type: 'SIGN_UP_SUCCESS' });
     } else {
       yield put({ type: 'SIGN_UP_FAILURE' });
@@ -71,8 +64,7 @@ export function* putSignOutRequest(action) {
   yield put({ type: 'LOADING_START' });
 
   try {
-    yield firebase.auth().signOut();
-    const user = yield firebase.auth().currentUser;
+    const user = yield services.auth.signOutUser();
 
     if (user) {
       yield put({ type: 'SIGN_OUT_FAILURE' });
