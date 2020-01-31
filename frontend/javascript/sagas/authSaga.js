@@ -8,10 +8,10 @@ export function* putIsSignInRequest(action) {
     const user = yield firebase.auth().currentUser;
     if (user) {
       yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
-      console.log('$$$$ user', user);
     } else {
       yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
     }
+    console.log('$$$$ user', user);
   } catch (error) {
     console.log('$$$$ error', error.toString());
     yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
@@ -19,9 +19,26 @@ export function* putIsSignInRequest(action) {
 }
 
 export function* putSignInRequest(action) {
-  yield call(delay, 2000);
-  yield put({ type: 'SIGN_IN_SUCCESS' });
-  yield put({ type: 'SIGN_IN_FAILURE' });
+  yield put({ type: 'LOADING_START' });
+
+  const { email, password } = action.values;
+
+  try {
+    yield firebase.auth().signInWithEmailAndPassword(email, password);
+
+    const user = yield firebase.auth().currentUser;
+
+    if (user) {
+      yield put({ type: 'SIGN_IN_SUCCESS' });
+    } else {
+      yield put({ type: 'SIGN_IN_FAILURE' });
+    }
+    console.log('$$$$ user', user);
+  } catch (error) {
+    yield put({ type: 'SIGN_IN_FAILURE' });
+  }
+
+  yield put({ type: 'LOADING_END' });
 }
 
 export function* putSignUpRequest(action) {
@@ -34,10 +51,12 @@ export function* putSignUpRequest(action) {
     const user = yield firebase.auth().currentUser;
 
     if (user) {
-      user.updateProfile({
+      yield user.updateProfile({
         displayName: name,
       });
       yield put({ type: 'SIGN_UP_SUCCESS' });
+    } else {
+      yield put({ type: 'SIGN_UP_FAILURE' });
     }
     console.log('$$$$ user', user);
   } catch (error) {
@@ -48,8 +67,30 @@ export function* putSignUpRequest(action) {
   yield put({ type: 'LOADING_END' });
 }
 
+export function* putSignOutRequest(action) {
+  yield put({ type: 'LOADING_START' });
+
+  try {
+    yield firebase.auth().signOut();
+    const user = yield firebase.auth().currentUser;
+
+    if (user) {
+      yield put({ type: 'SIGN_OUT_FAILURE' });
+    } else {
+      yield put({ type: 'SIGN_OUT_SUCCESS' });
+    }
+    console.log('$$$$ user', user);
+  } catch (error) {
+    console.log('$$$$ error', error.toString());
+    yield put({ type: 'SIGN_OUT_FAILURE' });
+  }
+
+  yield put({ type: 'LOADING_END' });
+}
+
 export default [
   takeLatest('FETCH_IS_SIGNED_IN_REQUEST', putIsSignInRequest),
   takeLatest('SIGN_IN_REQUEST', putSignInRequest),
   takeLatest('SIGN_UP_REQUEST', putSignUpRequest),
+  takeLatest('SIGN_OUT_REQUEST', putSignOutRequest),
 ];

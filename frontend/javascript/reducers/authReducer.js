@@ -13,7 +13,7 @@ const authReducer = (state = initialState, action) => {
     case 'FETCH_IS_SIGNED_IN_FALIURE': {
       return {
         ...state,
-        isSignedIn: true,
+        isSignedIn: false,
       };
     }
     case 'SIGN_IN_SUCCESS': {
@@ -49,7 +49,7 @@ const authReducer = (state = initialState, action) => {
     case 'SIGN_OUT_FALIURE': {
       return {
         ...state,
-        isSignedIn: false,
+        isSignedIn: true,
       };
     }
     default: {
