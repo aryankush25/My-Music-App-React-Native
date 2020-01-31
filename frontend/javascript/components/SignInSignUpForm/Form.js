@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
-import {Field} from 'redux-form';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 import Button from '../SharedComponents/CustomButton';
 

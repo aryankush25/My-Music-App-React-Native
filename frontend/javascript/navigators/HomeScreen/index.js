@@ -1,5 +1,7 @@
 import React from 'react';
-import {Button, View, StyleSheet} from 'react-native';
+import { Button, View, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useSwitchNavigation } from '../../hooks/navigationHooks';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +12,13 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = props => {
-  signOutAsync = async () => {};
+  const dispatch = useDispatch();
+
+  useSwitchNavigation({ navigation: props.navigation });
+
+  signOutAsync = async () => {
+    dispatch({ type: 'SIGN_OUT_REQUEST' });
+  };
 
   return (
     <View style={styles.container}>

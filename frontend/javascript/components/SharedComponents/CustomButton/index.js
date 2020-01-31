@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import styled, {css} from 'styled-components';
+import { Text, View, TouchableOpacity } from 'react-native';
+import styled, { css } from 'styled-components';
 
 const ButtonWrapper = styled(View)`
   padding-top: 40;

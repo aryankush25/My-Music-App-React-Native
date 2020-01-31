@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 import styled from 'styled-components';
 
 const MyTextInputWrapper = styled(View)`
@@ -30,7 +30,7 @@ const MyTextInput = ({
   input,
   label,
   type,
-  meta: {touched, error, warning},
+  meta: { touched, error, warning },
   ...inputProps
 }) => {
   return (

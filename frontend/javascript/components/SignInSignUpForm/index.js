@@ -1,10 +1,10 @@
 import React from 'react';
-import {SafeAreaView, ImageBackground} from 'react-native';
+import { SafeAreaView, ImageBackground } from 'react-native';
 import styled from 'styled-components';
 import Header from './Header';
 import Form from './Form';
 import Footer from './Footer';
-import {signInObject, signUpObject} from './helper.js';
+import { signInObject, signUpObject } from './helper.js';
 
 const SignInSignUpFormWrapper = styled(ImageBackground)`
   flex: 1;

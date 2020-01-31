@@ -1,10 +1,10 @@
 import React from 'react';
-import {reduxForm} from 'redux-form';
+import { reduxForm } from 'redux-form';
 import SignInSignUpForm from '../../components/SignInSignUpForm';
-import {useSwitchNavigation} from '../../hooks/authHooks';
+import { useSwitchNavigation } from '../../hooks/navigationHooks';
 
 const SignUpScreen = props => {
-  useSwitchNavigation({navigation: props.navigation})
+  useSwitchNavigation({ navigation: props.navigation });
   return (
     <SignInSignUpForm
       formFor="SignUp"
@@ -17,6 +17,6 @@ const SignUpScreen = props => {
 export default reduxForm({
   form: 'signUpForm',
   onSubmit: async (values, dispatch) => {
-    dispatch({type: 'SIGN_UP_REQUEST', values})
+    dispatch({ type: 'SIGN_UP_REQUEST', values });
   },
 })(SignUpScreen);
