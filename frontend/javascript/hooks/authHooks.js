@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 
 export const useDefaultAuth = () => {
   const dispatch = useDispatch();

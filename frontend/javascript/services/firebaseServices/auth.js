@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 
 export const fetchCurrentUser = async () => {
   const currentUser = await firebase.auth().currentUser;
