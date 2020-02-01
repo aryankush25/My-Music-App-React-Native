@@ -3,15 +3,15 @@ import services from '../services';
 
 export function* putIsSignInRequest(action) {
   try {
-    const user = yield services.auth.fetchCurrentUser();
-    if (user) {
+    const user = action.user;
+
+    if (action.user) {
       yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
     } else {
       yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
     }
-    console.log('$$$$ user', user);
   } catch (error) {
-    console.log('$$$$ error', error.toString());
+    console.log('error', error.toString());
     yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
   }
 }
@@ -31,8 +31,8 @@ export function* putSignInRequest(action) {
     } else {
       yield put({ type: 'SIGN_IN_FAILURE' });
     }
-    console.log('$$$$ user', user);
   } catch (error) {
+    console.log('error', error.toString());
     yield put({ type: 'SIGN_IN_FAILURE' });
   }
 
@@ -51,9 +51,8 @@ export function* putSignUpRequest(action) {
     } else {
       yield put({ type: 'SIGN_UP_FAILURE' });
     }
-    console.log('$$$$ user', user);
   } catch (error) {
-    console.log('$$$$ error', error.toString());
+    console.log('error', error.toString());
     yield put({ type: 'SIGN_UP_FAILURE' });
   }
 
@@ -71,9 +70,8 @@ export function* putSignOutRequest(action) {
     } else {
       yield put({ type: 'SIGN_OUT_SUCCESS' });
     }
-    console.log('$$$$ user', user);
   } catch (error) {
-    console.log('$$$$ error', error.toString());
+    console.log('error', error.toString());
     yield put({ type: 'SIGN_OUT_FAILURE' });
   }
 

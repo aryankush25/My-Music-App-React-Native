@@ -2,7 +2,6 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import styled from 'styled-components';
-import { useDefaultAuth } from '../hooks/authHooks';
 import { useSwitchNavigation } from '../hooks/navigationHooks';
 import AuthNavigators from './AuthNavigators';
 import AppNavigators from './AppNavigators';
@@ -14,7 +13,6 @@ const InitialLoaderContainer = styled(View)`
 `;
 
 const InitialLoadingNavigator = props => {
-  useDefaultAuth();
   useSwitchNavigation({ navigation: props.navigation });
 
   return (
