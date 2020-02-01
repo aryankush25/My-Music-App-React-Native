@@ -3,8 +3,9 @@ import services from '../services';
 
 export function* putIsSignInRequest(action) {
   try {
-    const user = yield services.auth.fetchCurrentUser();
-    if (user) {
+    const user = action.user;
+
+    if (action.user) {
       yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
     } else {
       yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
