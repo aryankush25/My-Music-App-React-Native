@@ -4,7 +4,7 @@ import SignInSignUpForm from '../../components/SignInSignUpForm';
 import { useSwitchNavigation } from '../../hooks/navigationHooks';
 
 const SignInScreen = props => {
-  useSwitchNavigation({ navigation: props.navigation });
+  useSwitchNavigation();
   const onClickForgotPassword = values => {
     console.log('onClickForgotPassword', values);
   };

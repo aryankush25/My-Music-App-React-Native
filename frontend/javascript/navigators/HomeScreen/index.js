@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const HomeScreen = props => {
   const dispatch = useDispatch();
 
-  useSwitchNavigation({ navigation: props.navigation });
+  useSwitchNavigation();
 
   signOutAsync = async () => {
     dispatch({ type: 'SIGN_OUT_REQUEST' });

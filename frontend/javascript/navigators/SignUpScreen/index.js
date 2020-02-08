@@ -4,7 +4,7 @@ import SignInSignUpForm from '../../components/SignInSignUpForm';
 import { useSwitchNavigation } from '../../hooks/navigationHooks';
 
 const SignUpScreen = props => {
-  useSwitchNavigation({ navigation: props.navigation });
+  useSwitchNavigation();
   return (
     <SignInSignUpForm
       formFor="SignUp"

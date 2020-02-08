@@ -13,7 +13,7 @@ const InitialLoaderContainer = styled(View)`
 `;
 
 const InitialLoadingNavigator = props => {
-  useSwitchNavigation({ navigation: props.navigation });
+  useSwitchNavigation();
 
   return (
     <InitialLoaderContainer>

@@ -1,14 +1,16 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigation } from 'react-navigation-hooks';
 
-export const useSwitchNavigation = ({ navigation }) => {
+export const useSwitchNavigation = () => {
   const isSignedIn = useSelector(state => state.authReducer.isSignedIn);
+  const { navigate } = useNavigation();
 
   const changeNavigator = useCallback(() => {
-    if (typeof isSignedIn === 'boolean' && navigation) {
-      navigation.navigate(isSignedIn ? 'App' : 'Auth');
+    if (typeof isSignedIn === 'boolean') {
+      navigate(isSignedIn ? 'App' : 'Auth');
     }
-  }, [isSignedIn, navigation]);
+  }, [isSignedIn]);
 
   useEffect(() => {
     changeNavigator();
