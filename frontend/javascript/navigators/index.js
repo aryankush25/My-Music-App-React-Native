@@ -1,24 +1,18 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import styled from 'styled-components';
 import { useSwitchNavigation } from '../hooks/navigationHooks';
+import ScreenContainer from '../containers/ScreenContainer';
 import AuthNavigators from './AuthNavigators';
 import AppNavigators from './AppNavigators';
-
-const InitialLoaderContainer = styled(View)`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
 
 const InitialLoadingNavigator = props => {
   useSwitchNavigation();
 
   return (
-    <InitialLoaderContainer>
-      <ActivityIndicator size="large" color="#0000ff" />
-    </InitialLoaderContainer>
+    <ScreenContainer>
+      <ActivityIndicator size="large" color="#ffffff" />
+    </ScreenContainer>
   );
 };
 
