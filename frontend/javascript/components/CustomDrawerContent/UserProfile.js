@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TouchableOpacity, Text, View, Image } from 'react-native';
-import userDefaultImage from '../../assets/images/avatar.png';
+import userDefaultImage from '../../assets/images/icons8-user-100.png';
 
 const UserProfileWrapper = styled(TouchableOpacity)`
   margin: 20px 0;
