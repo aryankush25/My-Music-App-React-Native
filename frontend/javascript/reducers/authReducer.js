@@ -1,6 +1,6 @@
 const initialState = {
   isSignedIn: null,
-  currentUser: null,
+  currentUser: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -9,49 +9,49 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isSignedIn: true,
-        currentUser: action.payload.user,
+        currentUser: action.payload.user
       };
     }
     case 'FETCH_IS_SIGNED_IN_FALIURE': {
       return {
         ...state,
-        isSignedIn: false,
+        isSignedIn: false
       };
     }
     case 'SIGN_IN_SUCCESS': {
       return {
         ...state,
-        isSignedIn: true,
+        isSignedIn: true
       };
     }
     case 'SIGN_IN_FAILURE': {
       return {
         ...state,
-        isSignedIn: false,
+        isSignedIn: false
       };
     }
     case 'SIGN_UP_SUCCESS': {
       return {
         ...state,
-        isSignedIn: true,
+        isSignedIn: true
       };
     }
     case 'SIGN_UP_FAILURE': {
       return {
         ...state,
-        isSignedIn: false,
+        isSignedIn: false
       };
     }
     case 'SIGN_OUT_SUCCESS': {
       return {
         ...state,
-        isSignedIn: false,
+        isSignedIn: false
       };
     }
     case 'SIGN_OUT_FALIURE': {
       return {
         ...state,
-        isSignedIn: true,
+        isSignedIn: true
       };
     }
     default: {

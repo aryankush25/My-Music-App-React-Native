@@ -2,31 +2,31 @@ export const drawerNavigationObject = {
   home: {
     label: 'Home',
     name: 'home',
-    iconName: 'home',
+    iconName: 'home'
   },
   songs: {
     label: 'Songs',
     name: 'songs',
-    iconName: 'headset',
+    iconName: 'headset'
   },
   playlists: {
     label: 'Playlists',
     name: 'playlists',
-    iconName: 'list',
+    iconName: 'list'
   },
   people: {
     label: 'People',
     name: 'people',
-    iconName: 'people',
+    iconName: 'people'
   },
   likedSongs: {
     label: 'Liked Songs',
     name: 'likedSongs',
-    iconName: 'favorite',
+    iconName: 'favorite'
   },
   settings: {
     label: 'Settings',
     name: 'settings',
-    iconName: 'settings',
-  },
+    iconName: 'settings'
+  }
 };

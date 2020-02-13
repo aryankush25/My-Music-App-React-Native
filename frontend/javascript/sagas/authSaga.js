@@ -82,5 +82,5 @@ export default [
   takeLatest('FETCH_IS_SIGNED_IN_REQUEST', putIsSignInRequest),
   takeLatest('SIGN_IN_REQUEST', putSignInRequest),
   takeLatest('SIGN_UP_REQUEST', putSignUpRequest),
-  takeLatest('SIGN_OUT_REQUEST', putSignOutRequest),
+  takeLatest('SIGN_OUT_REQUEST', putSignOutRequest)
 ];

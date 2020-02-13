@@ -9,7 +9,7 @@ const reduxLogger = createLogger({});
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(sagaMiddleware, reduxLogger),
+  applyMiddleware(sagaMiddleware, reduxLogger)
 );
 
 sagaMiddleware.run(rootSaga);

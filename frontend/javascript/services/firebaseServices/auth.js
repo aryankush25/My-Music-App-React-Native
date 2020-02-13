@@ -16,7 +16,7 @@ export const signUpUser = async (name, email, password) => {
   let currentUser = await fetchCurrentUser();
   if (currentUser) {
     currentUser = await updateUser({
-      displayName: name,
+      displayName: name
     });
   }
 
@@ -41,5 +41,5 @@ export default {
   signInUser,
   signUpUser,
   signOutUser,
-  updateUser,
+  updateUser
 };

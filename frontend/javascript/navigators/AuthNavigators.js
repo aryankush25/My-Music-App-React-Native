@@ -7,7 +7,7 @@ import SignUpScreen from './SignUpScreen';
 const AuthNavigators = createBottomTabNavigator(
   {
     'Sign In': SignInScreen,
-    'Sign Up': SignUpScreen,
+    'Sign Up': SignUpScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -21,20 +21,20 @@ const AuthNavigators = createBottomTabNavigator(
           iconName = 'person-add';
         }
         return <Icon name={iconName} color={iconColor} />;
-      },
+      }
     }),
     tabBarOptions: {
       inactiveTintColor: 'gray',
       activeTintColor: 'white',
       labelStyle: {
-        fontSize: 14,
+        fontSize: 14
       },
       style: {
         backgroundColor: '#14192D',
-        paddingTop: 4,
-      },
-    },
-  },
+        paddingTop: 4
+      }
+    }
+  }
 );
 
 export default AuthNavigators;

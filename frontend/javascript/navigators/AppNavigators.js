@@ -50,7 +50,7 @@ const DrawerNavigator = props => {
         initialRouteName="home"
         drawerStyle={{
           backgroundColor: '#14192d',
-          width: 300,
+          width: 300
         }}
         keyboardDismissMode
         drawerContent={props => <CustomDrawerContent {...props} />}>
@@ -72,15 +72,15 @@ const AppNavigators = createAppContainer(
   createStackNavigator(
     {
       Drawer: DrawerNavigator,
-      Profile: ProfileScreen,
+      Profile: ProfileScreen
     },
     {
       initialRouteName: 'Drawer',
       defaultNavigationOptions: {
-        header: null,
-      },
-    },
-  ),
+        header: null
+      }
+    }
+  )
 );
 
 export default AppNavigators;

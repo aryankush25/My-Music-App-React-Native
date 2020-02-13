@@ -1,5 +1,5 @@
 const initialState = {
-  loading: false,
+  loading: false
 };
 
 const loadingReducer = (state = initialState, action) => {
@@ -7,13 +7,13 @@ const loadingReducer = (state = initialState, action) => {
     case 'LOADING_START': {
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     }
     case 'LOADING_END': {
       return {
         ...state,
-        loading: false,
+        loading: false
       };
     }
     default: {

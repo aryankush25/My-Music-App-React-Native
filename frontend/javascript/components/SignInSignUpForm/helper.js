@@ -10,22 +10,22 @@ export const inputTypes = {
     component: MyTextInput,
     placeholder: 'Full Name',
     secureTextEntry: false,
-    validate: [required],
+    validate: [required]
   },
   email: {
     name: 'email',
     component: MyTextInput,
     placeholder: 'Email Address',
     secureTextEntry: false,
-    validate: [required, email],
+    validate: [required, email]
   },
   password: {
     name: 'password',
     component: MyTextInput,
     placeholder: 'Password',
     secureTextEntry: true,
-    validate: [required, minLength8],
-  },
+    validate: [required, minLength8]
+  }
 };
 
 export const signInFields = [inputTypes.email, inputTypes.password];
@@ -33,7 +33,7 @@ export const signInFields = [inputTypes.email, inputTypes.password];
 export const signUpFields = [
   inputTypes.name,
   inputTypes.email,
-  inputTypes.password,
+  inputTypes.password
 ];
 
 export const signInObject = {
@@ -41,25 +41,25 @@ export const signInObject = {
   header: {
     title: 'Sign In',
     label: 'LOVEMUSIC',
-    labelImage: musicAppLogo,
+    labelImage: musicAppLogo
   },
   form: {
     fields: signInFields,
     buttonLabel: 'Sign In',
     buttonColor: '#0076FF',
     buttonWidth: 250,
-    forgotPassword: true,
-  },
+    forgotPassword: true
+  }
 };
 
 export const signUpObject = {
   bgImage: signUpImage,
   header: {
     title: 'Sign Up',
-    label: 'Account Registration',
+    label: 'Account Registration'
   },
   form: {
     fields: signUpFields,
-    buttonLabel: 'Sign Up',
-  },
+    buttonLabel: 'Sign Up'
+  }
 };

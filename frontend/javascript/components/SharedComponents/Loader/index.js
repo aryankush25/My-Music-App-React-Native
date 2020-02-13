@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: '#00000040',
+    backgroundColor: '#00000040'
   },
   activityIndicatorWrapper: {
     height: 100,
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-around',
-  },
+    justifyContent: 'space-around'
+  }
 });
 
 export default Loader;
