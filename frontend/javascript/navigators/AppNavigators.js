@@ -2,7 +2,8 @@ import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import CustomDrawerContent from '../components/CustomDrawerContent';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { drawerNavigationObject } from '../utils/helper';
 import HomeScreen from './HomeScreen';
 import SongsScreen from './SongsScreen';
@@ -68,13 +69,16 @@ const DrawerNavigator = props => {
 };
 
 const AppNavigators = createAppContainer(
-  createSwitchNavigator(
+  createStackNavigator(
     {
       Drawer: DrawerNavigator,
       Profile: ProfileScreen,
     },
     {
       initialRouteName: 'Drawer',
+      defaultNavigationOptions: {
+        header: null,
+      },
     },
   ),
 );

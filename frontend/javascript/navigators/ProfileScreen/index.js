@@ -17,7 +17,7 @@ const ProfileScreen = props => {
       <Button
         title="Back"
         onPress={() => {
-          props.navigation.navigate('Drawer');
+          props.navigation.goBack();
         }}
       />
     </View>
