@@ -1,5 +1,6 @@
 const initialState = {
   isSignedIn: null,
+  currentUser: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -8,6 +9,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isSignedIn: true,
+        currentUser: action.payload.user,
       };
     }
     case 'FETCH_IS_SIGNED_IN_FALIURE': {

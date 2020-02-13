@@ -5,14 +5,14 @@ export function* putIsSignInRequest(action) {
   try {
     const user = action.user;
 
-    if (action.user) {
-      yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS' });
+    if (user) {
+      yield put({ type: 'FETCH_IS_SIGNED_IN_SUCCESS', payload: { user } });
     } else {
-      yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
+      yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE', payload: { user } });
     }
   } catch (error) {
     console.log('error', error.toString());
-    yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE' });
+    yield put({ type: 'FETCH_IS_SIGNED_IN_FALIURE', payload: { user } });
   }
 }
 
