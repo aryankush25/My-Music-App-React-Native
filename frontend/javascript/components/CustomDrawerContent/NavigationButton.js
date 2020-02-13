@@ -4,15 +4,20 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 const NavigationButtonConatiner = styled(TouchableOpacity)`
-  margin: 10px 0 0;
-  padding: 10px 0;
+  margin: 12px 0 0;
+  padding: 15px 0;
   padding-left: 20px;
   display: flex;
   flex-direction: row;
   ${props =>
-    props.highlight &&
+    props.highlightedPink &&
     css`
       background-color: #fe2851;
+    `}
+  ${props =>
+    props.highlightedBlue &&
+    css`
+      background-color: #0076ff;
     `}
 `;
 
@@ -29,7 +34,8 @@ const CustomText = styled(Text)`
 const NavigationButton = props => {
   return (
     <NavigationButtonConatiner
-      highlight={props.highlight}
+      highlightedPink={props.highlightedPink}
+      highlightedBlue={props.highlightedBlue}
       onPress={props.onPressAction}>
       <IconWrapper>
         <Icon name={props.iconName} color="white" />

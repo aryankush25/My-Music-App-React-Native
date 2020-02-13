@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useSwitchNavigation } from '../../hooks/navigationHooks';
 import UserProfile from './UserProfile';
 import NavigationButton from './NavigationButton';
+import { drawerNavigationObject } from '../../utils/helper';
 
 const CustomDrawerContentContainer = styled(View)`
   padding: 20px 0;
@@ -21,9 +22,11 @@ const CustomDrawerContent = props => {
 
   useSwitchNavigation();
 
-  signOutAsync = async () => {
+  const signOutAsync = async () => {
     dispatch({ type: 'SIGN_OUT_REQUEST' });
   };
+
+  const navigators = Object.keys(drawerNavigationObject);
 
   return (
     <CustomDrawerContentContainer>
@@ -32,18 +35,24 @@ const CustomDrawerContent = props => {
       <UserProfile />
 
       <NavigationButtonWrapper>
-        <NavigationButton label="Home" iconName="home" />
-        <NavigationButton label="Songs" iconName="headset" />
-        <NavigationButton label="Playlists" iconName="list" />
-        <NavigationButton label="People" iconName="people" />
-        <NavigationButton label="Liked Songs" iconName="favorite" />
-        <NavigationButton label="Settings" iconName="settings" />
+        {navigators.map((navigator, index) => {
+          const { label, name, iconName } = drawerNavigationObject[navigator];
+          return (
+            <NavigationButton
+              key={index}
+              label={label}
+              name={name}
+              iconName={iconName}
+              onPressAction={() => props.navigation.navigate(name)}
+            />
+          );
+        })}
       </NavigationButtonWrapper>
 
       <NavigationButton
         label="Sign Out"
         iconName="power-settings-new"
-        highlight
+        highlightedPink
         onPressAction={signOutAsync}
       />
 

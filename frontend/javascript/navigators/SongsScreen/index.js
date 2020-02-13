@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = props => {
+const SongsScreen = props => {
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <Text>SongsScreen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default SongsScreen;

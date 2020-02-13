@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TouchableOpacity, Text, View, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import * as R from 'ramda';
+import { useNavigation } from 'react-navigation-hooks';
 import userDefaultImage from '../../assets/images/icons8-user-100.png';
 
 const UserProfileWrapper = styled(TouchableOpacity)`
@@ -43,15 +46,20 @@ const UserDefaultImage = styled(Image)`
 `;
 
 const UserProfile = () => {
+  const { navigate } = useNavigation();
+  const { displayName, photoURL, email, phoneNumber } = useSelector(state =>
+    R.pathOr({}, ['authReducer', 'currentUser'], state),
+  );
+
   return (
-    <UserProfileWrapper>
+    <UserProfileWrapper onPress={() => navigate('Profile')}>
       <TextBlock>
-        <HeadingText>Aryan Agarwal</HeadingText>
-        <NormalText>+918171256946</NormalText>
-        <NormalText>aryankush025@gmail.com</NormalText>
+        {displayName && <HeadingText>{displayName}</HeadingText>}
+        {phoneNumber && <NormalText>{phoneNumber}</NormalText>}
+        {email && <NormalText>{email}</NormalText>}
       </TextBlock>
       <ImageBlock>
-        <UserDefaultImage source={userDefaultImage} />
+        <UserDefaultImage source={photoURL || userDefaultImage} />
       </ImageBlock>
     </UserProfileWrapper>
   );

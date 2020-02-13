@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = props => {
+const PeopleScreen = props => {
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <Text>PeopleScreen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default PeopleScreen;

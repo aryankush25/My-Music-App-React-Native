@@ -1,47 +1,82 @@
 import * as React from 'react';
-import { Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import CustomDrawerContent from '../components/CustomDrawerContent';
-import ScreenContainer from '../containers/ScreenContainer';
-
-function HomeScreen({ navigation }) {
-  return (
-    <ScreenContainer>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </ScreenContainer>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <ScreenContainer>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </ScreenContainer>
-  );
-}
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { drawerNavigationObject } from '../utils/helper';
+import HomeScreen from './HomeScreen';
+import SongsScreen from './SongsScreen';
+import PlaylistsScreen from './PlaylistsScreen';
+import PeopleScreen from './PeopleScreen';
+import LikedSongsScreen from './LikedSongsScreen';
+import SettingsScreen from './SettingsScreen';
+import ProfileScreen from './ProfileScreen';
 
 const Drawer = createDrawerNavigator();
 
-const AppNavigator = props => {
+const getScreen = screen => {
+  switch (screen) {
+    case 'home': {
+      return HomeScreen;
+    }
+    case 'songs': {
+      return SongsScreen;
+    }
+    case 'playlists': {
+      return PlaylistsScreen;
+    }
+    case 'people': {
+      return PeopleScreen;
+    }
+    case 'likedSongs': {
+      return LikedSongsScreen;
+    }
+    case 'settings': {
+      return SettingsScreen;
+    }
+    default: {
+      return HomeScreen;
+    }
+  }
+};
+
+const DrawerNavigator = props => {
+  const screens = Object.keys(drawerNavigationObject);
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Home"
+        initialRouteName="home"
         drawerStyle={{
           backgroundColor: '#14192d',
           width: 300,
         }}
         keyboardDismissMode
         drawerContent={props => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+        {screens.map((screen, index) => {
+          return (
+            <Drawer.Screen
+              key={index}
+              name={screen}
+              component={getScreen(screen)}
+            />
+          );
+        })}
       </Drawer.Navigator>
     </NavigationContainer>
   );
 };
 
-export default AppNavigator;
+const AppNavigators = createAppContainer(
+  createSwitchNavigator(
+    {
+      Drawer: DrawerNavigator,
+      Profile: ProfileScreen,
+    },
+    {
+      initialRouteName: 'Drawer',
+    },
+  ),
+);
+
+export default AppNavigators;
