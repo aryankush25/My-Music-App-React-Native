@@ -21,10 +21,10 @@ export default createAppContainer(
     {
       InitialLoading: InitialLoadingNavigator,
       Auth: AuthNavigators,
-      App: AppNavigators,
+      App: AppNavigators
     },
     {
-      initialRouteName: 'InitialLoading',
-    },
-  ),
+      initialRouteName: 'InitialLoading'
+    }
+  )
 );

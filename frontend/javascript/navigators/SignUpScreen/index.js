@@ -18,5 +18,5 @@ export default reduxForm({
   form: 'signUpForm',
   onSubmit: async (values, dispatch) => {
     dispatch({ type: 'SIGN_UP_REQUEST', values });
-  },
+  }
 })(SignUpScreen);

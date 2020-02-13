@@ -5,5 +5,5 @@ export const firebaseConfig = {
   projectId: 'my-music-app-72e59',
   storageBucket: 'my-music-app-72e59.appspot.com',
   messagingSenderId: '847642897205',
-  appId: '1:847642897205:web:05feb4aac8aa582b1f7a7c',
+  appId: '1:847642897205:web:05feb4aac8aa582b1f7a7c'
 };

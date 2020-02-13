@@ -6,7 +6,7 @@ import loadingReducer from './loadingReducer';
 const rootReducer = combineReducers({
   authReducer,
   loadingReducer,
-  form: formReducer,
+  form: formReducer
 });
 
 export default rootReducer;

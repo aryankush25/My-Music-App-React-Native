@@ -1,6 +1,6 @@
 # My-Music-App-React-Native
 
-> #### ***Note: Please do not use `npm` to manage dependencies. Use :heart:`yarn`:heart: instead. We use `yarn` because of better performance.***
+> #### **_Note: Please do not use `npm` to manage dependencies. Use :heart:`yarn`:heart: instead. We use `yarn` because of better performance._**
 
 ## Initial Setup
 
@@ -35,8 +35,6 @@ npx react-native run-ios # Start app in ios
 
 You can also refer the official [React Native docs](https://facebook.github.io/react-native/docs/getting-started) for installation and setup.
 
-
-
 ## Backend Node Server @ backend/ Installation steps
 
 ```bash
@@ -50,6 +48,7 @@ yarn start # starts the backend node server through `nodemon`
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.

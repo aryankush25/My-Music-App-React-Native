@@ -23,5 +23,5 @@ export default reduxForm({
   form: 'signInForm',
   onSubmit: (values, dispatch) => {
     dispatch({ type: 'SIGN_IN_REQUEST', values });
-  },
+  }
 })(SignInScreen);

@@ -5,5 +5,5 @@ import storage from './storage';
 export default {
   auth,
   firestore,
-  storage,
+  storage
 };

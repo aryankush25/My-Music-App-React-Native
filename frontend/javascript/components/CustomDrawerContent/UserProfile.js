@@ -48,7 +48,7 @@ const UserDefaultImage = styled(Image)`
 const UserProfile = () => {
   const { navigate } = useNavigation();
   const { displayName, photoURL, email, phoneNumber } = useSelector(state =>
-    R.pathOr({}, ['authReducer', 'currentUser'], state),
+    R.pathOr({}, ['authReducer', 'currentUser'], state)
   );
 
   return (
