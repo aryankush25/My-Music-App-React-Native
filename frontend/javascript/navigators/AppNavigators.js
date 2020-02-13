@@ -5,43 +5,12 @@ import CustomDrawerContent from '../components/CustomDrawerContent';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { drawerNavigationObject } from '../utils/helper';
-import HomeScreen from './HomeScreen';
-import SongsScreen from './SongsScreen';
-import PlaylistsScreen from './PlaylistsScreen';
-import PeopleScreen from './PeopleScreen';
-import LikedSongsScreen from './LikedSongsScreen';
-import SettingsScreen from './SettingsScreen';
+import { getScreen } from './utils';
 import ProfileScreen from './ProfileScreen';
 
 const Drawer = createDrawerNavigator();
 
-const getScreen = screen => {
-  switch (screen) {
-    case 'home': {
-      return HomeScreen;
-    }
-    case 'songs': {
-      return SongsScreen;
-    }
-    case 'playlists': {
-      return PlaylistsScreen;
-    }
-    case 'people': {
-      return PeopleScreen;
-    }
-    case 'likedSongs': {
-      return LikedSongsScreen;
-    }
-    case 'settings': {
-      return SettingsScreen;
-    }
-    default: {
-      return HomeScreen;
-    }
-  }
-};
-
-const DrawerNavigator = props => {
+const DrawerNavigator = () => {
   const screens = Object.keys(drawerNavigationObject);
 
   return (
@@ -77,7 +46,7 @@ const AppNavigators = createAppContainer(
     {
       initialRouteName: 'Drawer',
       defaultNavigationOptions: {
-        header: null
+        headerShown: false
       }
     }
   )
