@@ -1,18 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'blue'
-  }
-});
+import { View, Text, Button } from 'react-native';
+import ScreenContainer from '../../containers/ScreenContainer';
 
 const ProfileScreen = props => {
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       <Text>ProfileScreen</Text>
       <Button
         title="Back"
@@ -20,7 +12,7 @@ const ProfileScreen = props => {
           props.navigation.goBack();
         }}
       />
-    </View>
+    </ScreenContainer>
   );
 };
 
