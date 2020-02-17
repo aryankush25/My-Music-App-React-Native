@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import styled from 'styled-components';
+import { View, Text, Dimensions, SafeAreaView } from 'react-native';
 import ScreenContainer from '../../containers/ScreenContainer';
+import Header from '../../components/SharedComponents/Header';
+
+var { height, width } = Dimensions.get('window');
 
 const ProfileScreen = props => {
   return (
-    <ScreenContainer>
-      <Text>ProfileScreen</Text>
-      <Button
-        title="Back"
-        onPress={() => {
-          props.navigation.goBack();
-        }}
+    <ScreenContainer center={false}>
+      <SafeAreaView />
+      <Header
+        title="My Profile"
+        onPressHandler={() => props.navigation.goBack()}
       />
     </ScreenContainer>
   );
