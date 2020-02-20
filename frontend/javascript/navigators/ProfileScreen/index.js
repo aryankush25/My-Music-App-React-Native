@@ -11,6 +11,7 @@ import UserInfo from './UserInfo';
 import UserNameImage from './UserNameImage';
 import editButtonImage from '../../assets/icons/edit-pencil.png';
 import CustomButton from '../../components/SharedComponents/CustomButton';
+import { isPresent } from '../../utils/helper';
 
 const MY_PROFILE_FORM = 'myProfileForm';
 
@@ -82,10 +83,12 @@ const ProfileScreen = props => {
                 } else if (response.error) {
                   console.log('ImagePicker Error: ', response.error);
                 } else {
-                  // const source = { uri: response.uri };
-                  // You can also display the image using data:
                   const source = {
-                    uri: 'data:image/jpeg;base64,' + response.data
+                    type: response.type,
+                    uri: 'data:image/jpeg;base64,' + response.data,
+                    fileName: isPresent(response.fileName)
+                      ? response.fileName
+                      : 'My Avatar'
                   };
 
                   updateFormField('photoURL', source);
