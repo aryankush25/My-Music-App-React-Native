@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import styled from 'styled-components';
-import musicAppLogo from '../../assets/images/music-app-icon.png';
+import musicAppLogo from '../../assets/icons/music-app-icon.png';
 
 const FooterContainer = styled(View)`
   width: 80%;

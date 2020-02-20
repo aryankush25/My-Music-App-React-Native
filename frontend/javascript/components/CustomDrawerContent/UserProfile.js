@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as R from 'ramda';
 import { useNavigation } from 'react-navigation-hooks';
-import userDefaultImage from '../../assets/images/icons8-user-100.png';
+import userDefaultImage from '../../assets/icons/user-male.png';
 
 const UserProfileWrapper = styled(TouchableOpacity)`
   margin: 20px 0;

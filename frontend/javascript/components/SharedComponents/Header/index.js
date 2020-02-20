@@ -1,25 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
-import { Icon } from 'react-native-elements';
-
-var { height, width } = Dimensions.get('window');
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import backIcon from '../../../assets/icons/back.png';
 
 const HeaderContainer = styled(View)`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 10px 5px;
   position: relative;
+  border-bottom-width: 2;
+  border-bottom-color: #bfbfbf;
+`;
+
+const LeftContainer = styled(View)`
+  align-items: flex-start;
+  display: flex;
+  width: 25%;
 `;
 
 const BackButton = styled(TouchableOpacity)`
-  position: absolute;
-  left: 10;
-  top: 10;
+  border-radius: 100;
+  padding: 10px;
+`;
+
+const BackIcon = styled(Image)`
+  height: 20px;
+  width: 20px;
+`;
+
+const MiddleContainer = styled(View)`
+  align-items: center;
   display: flex;
-  flex-direction: row;
+  width: 50%;
 `;
 
 const CustomText = styled(Text)`
@@ -27,17 +42,26 @@ const CustomText = styled(Text)`
   font-size: 18px;
 `;
 
-const Header = ({ title, backButtonText = 'Back', onPressHandler }) => {
+const RightContainer = styled(View)`
+  align-items: flex-end;
+  display: flex;
+  width: 25%;
+`;
+
+const Header = ({ title, onPressHandler, rightComponent }) => {
   return (
     <HeaderContainer>
-      <BackButton title="Back" onPress={onPressHandler}>
-        <Icon name="keyboard-arrow-left" color="white" />
-        <CustomText>{backButtonText}</CustomText>
-      </BackButton>
+      <LeftContainer>
+        <BackButton onPress={onPressHandler}>
+          <BackIcon source={backIcon} />
+        </BackButton>
+      </LeftContainer>
 
-      <View>
+      <MiddleContainer>
         <CustomText>{title}</CustomText>
-      </View>
+      </MiddleContainer>
+
+      <RightContainer>{rightComponent}</RightContainer>
     </HeaderContainer>
   );
 };
