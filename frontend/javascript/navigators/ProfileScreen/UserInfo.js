@@ -1,10 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TextInput } from 'react-native';
 import { Field } from 'redux-form';
 import DatePicker from './DatePicker';
 import GenderPicker from './GenderPicker';
+import CustomTextInput from '../../components/SharedComponents/CustomTextInput';
 import editButtonImage from '../../assets/icons/edit-pencil.png';
+import { isPresent } from '../../utils/helper';
 
 const UserInfoView = styled(View)`
   padding: 30px 30px;
@@ -56,6 +58,14 @@ const EditImage = styled(Image)`
   margin-bottom: 3px;
 `;
 
+const textInputWrapperCustomStyles = css`
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  height: 18;
+  padding: 0;
+`;
+
 const UserInfoBlock = ({ label, value }) => {
   return (
     <UserInfoBlockContainer>
@@ -66,14 +76,27 @@ const UserInfoBlock = ({ label, value }) => {
   );
 };
 
-const UserInfoEditBlock = ({ label, component }) => {
+const UserInfoEditBlock = props => {
   return (
     <UserInfoBlockContainer withBottomBorder>
       <LableEditView>
-        <LabelText>{label}</LabelText>
+        <LabelText>{props.label}</LabelText>
         <EditImage source={editButtonImage} />
       </LableEditView>
-      <View>{component}</View>
+      <View>
+        {isPresent(props.component) ? (
+          props.component
+        ) : (
+          <Field
+            name={props.name}
+            component={CustomTextInput}
+            value={props.value}
+            placeholder={props.placeholder}
+            noWrapper
+            customStyles={textInputWrapperCustomStyles}
+          />
+        )}
+      </View>
     </UserInfoBlockContainer>
   );
 };
@@ -84,15 +107,21 @@ const UserInfo = props => {
       <UserInfoView>
         <UserInfoEditBlock
           label="Name"
-          component={<ValueText>{props.displayName}</ValueText>}
+          name="displayName"
+          value={props.displayName}
+          placeholder="Enter Name"
         />
         <UserInfoEditBlock
           label="Email"
-          component={<ValueText>{props.email}</ValueText>}
+          name="email"
+          value={props.email}
+          placeholder="Enter Email"
         />
         <UserInfoEditBlock
           label="Phone Number"
-          component={<ValueText>{props.phoneNumber}</ValueText>}
+          name="phoneNumber"
+          value={props.phoneNumber}
+          placeholder="Enter Phone Number"
         />
         <UserInfoEditBlock
           label="Birthday"

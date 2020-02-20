@@ -9,6 +9,11 @@ const ValueText = styled(Text)`
   font-size: 14px;
   color: white;
   font-weight: bold;
+  ${props =>
+    props.placeholder &&
+    css`
+      color: #bfbfbf;
+    `}
 `;
 
 const Container = styled.TouchableOpacity`
@@ -108,7 +113,7 @@ const DatePicker = props => {
     <View>
       <View>
         <TouchableOpacity onPress={() => setShow(true)}>
-          <ValueText>{value}</ValueText>
+          <ValueText placeholder={!isPresent(date)}>{value}</ValueText>
         </TouchableOpacity>
       </View>
 

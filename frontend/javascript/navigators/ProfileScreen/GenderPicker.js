@@ -41,7 +41,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderWidth: 0
   },
   placeholder: {
-    color: 'white',
+    color: '#bfbfbf',
     fontSize: 14,
     fontWeight: 'bold'
   }
