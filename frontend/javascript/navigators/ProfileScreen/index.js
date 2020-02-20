@@ -37,11 +37,25 @@ const ProfileScreen = props => {
   useEffect(() => {
     const { displayName, photoURL, email, phoneNumber } = initialValues;
     dispatch(
-      initialize(MY_PROFILE_FORM, { displayName, photoURL, email, phoneNumber })
+      initialize(MY_PROFILE_FORM, {
+        displayName,
+        photoURL,
+        email,
+        phoneNumber,
+        birthday,
+        gender
+      })
     );
   }, []);
 
-  const { displayName, photoURL, email, phoneNumber } = values;
+  const {
+    displayName,
+    photoURL,
+    email,
+    phoneNumber,
+    birthday,
+    gender
+  } = values;
 
   const updateFormField = (key, value) =>
     dispatch(change(MY_PROFILE_FORM, key, value));
@@ -112,6 +126,8 @@ const ProfileScreen = props => {
         displayName={displayName}
         email={email}
         phoneNumber={phoneNumber}
+        birthday={birthday}
+        gender={gender}
         isEditingModeEnable={isEditingModeEnable}
       />
 
