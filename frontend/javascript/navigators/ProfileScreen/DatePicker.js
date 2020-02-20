@@ -66,6 +66,7 @@ const DatePickerContainer = ({ isIos, date, onChange, setShow }) => {
         mode={'date'}
         display="default"
         onChange={onChange}
+        maximumDate={new Date()}
         style={{ backgroundColor: 'white' }}
       />
 
@@ -81,7 +82,7 @@ const DatePickerContainer = ({ isIos, date, onChange, setShow }) => {
 };
 
 const DatePicker = props => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const isIos = Platform.OS === 'ios';
