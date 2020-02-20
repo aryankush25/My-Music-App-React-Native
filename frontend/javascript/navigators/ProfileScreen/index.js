@@ -51,7 +51,14 @@ const ProfileScreen = props => {
       <SafeAreaView />
       <Header
         title="My Profile"
-        onPressHandler={() => props.navigation.goBack()}
+        onPressHandler={() => {
+          if (isEditingModeEnable) {
+            setIsEditingModeOnEnable(false);
+            props.reset();
+          } else {
+            props.navigation.goBack();
+          }
+        }}
         rightComponent={
           !isEditingModeEnable && (
             <EditButton onPress={() => setIsEditingModeOnEnable(true)}>
