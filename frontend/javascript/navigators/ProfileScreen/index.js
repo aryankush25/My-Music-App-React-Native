@@ -129,6 +129,7 @@ const ProfileScreen = props => {
         birthday={birthday}
         gender={gender}
         isEditingModeEnable={isEditingModeEnable}
+        updateFormField={updateFormField}
       />
 
       {isEditingModeEnable && (

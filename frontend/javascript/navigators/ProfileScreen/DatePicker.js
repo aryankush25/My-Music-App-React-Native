@@ -52,6 +52,8 @@ const DateDoneButtonText = styled(Text)`
 `;
 
 const DatePickerContainer = ({ isIos, date, onChange, setShow }) => {
+  const currentDate = new Date();
+
   return (
     <Container>
       {isIos && (
@@ -63,11 +65,11 @@ const DatePickerContainer = ({ isIos, date, onChange, setShow }) => {
       <DateTimePicker
         testID="dateTimePicker"
         timeZoneOffsetInMinutes={0}
-        value={date}
+        value={date || currentDate}
         mode={'date'}
         display="default"
         onChange={onChange}
-        maximumDate={new Date()}
+        maximumDate={currentDate}
         style={{ backgroundColor: 'white' }}
       />
 
@@ -83,8 +85,8 @@ const DatePickerContainer = ({ isIos, date, onChange, setShow }) => {
 };
 
 const DatePicker = props => {
-  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const { date, setDate } = props;
 
   const isIos = Platform.OS === 'ios';
 

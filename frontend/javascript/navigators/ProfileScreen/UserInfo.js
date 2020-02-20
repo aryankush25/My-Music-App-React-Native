@@ -95,7 +95,12 @@ const UserInfo = props => {
         />
         <UserInfoEditBlock
           label="Birthday"
-          component={<DatePicker date={props.birthday} />}
+          component={
+            <DatePicker
+              date={props.birthday}
+              setDate={date => props.updateFormField('birthday', date)}
+            />
+          }
         />
         <UserInfoEditBlock
           label="Gender"
