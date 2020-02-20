@@ -13,14 +13,6 @@ import editButtonImage from '../../assets/icons/edit-pencil.png';
 import CustomButton from '../../components/SharedComponents/CustomButton';
 
 const MY_PROFILE_FORM = 'myProfileForm';
-const options = {
-  title: 'Select Avatar',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
 
 const EditButton = styled(TouchableOpacity)`
   border-radius: 100;
@@ -73,35 +65,36 @@ const ProfileScreen = props => {
         displayName={displayName}
         isEditingModeEnable={isEditingModeEnable}
         imageButtonAction={mode => {
-          let data = null;
-
           if (mode === 'uploadMode') {
-            ImagePicker.showImagePicker(options, response => {
-              console.log('Response = ', response);
+            ImagePicker.showImagePicker(
+              {
+                title: 'Select Avatar',
+                storageOptions: {
+                  skipBackup: true,
+                  path: 'images'
+                }
+              },
+              response => {
+                console.log('Response = ', response);
 
-              if (response.didCancel) {
-                console.log('User cancelled image picker');
-              } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                console.log(
-                  'User tapped custom button: ',
-                  response.customButton
-                );
-              } else {
-                // const source = { uri: response.uri };
+                if (response.didCancel) {
+                  console.log('User cancelled image picker');
+                } else if (response.error) {
+                  console.log('ImagePicker Error: ', response.error);
+                } else {
+                  // const source = { uri: response.uri };
+                  // You can also display the image using data:
+                  const source = {
+                    uri: 'data:image/jpeg;base64,' + response.data
+                  };
 
-                // You can also display the image using data:
-                const source = {
-                  uri: 'data:image/jpeg;base64,' + response.data
-                };
-
-                data = source;
+                  updateFormField('photoURL', source);
+                }
               }
-            });
+            );
+          } else {
+            updateFormField('photoURL', null);
           }
-
-          updateFormField('photoURL', data);
         }}
       />
 
