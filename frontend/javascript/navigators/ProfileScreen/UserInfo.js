@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { View, Text, Image } from 'react-native';
 import { Field } from 'redux-form';
 import DatePicker from './DatePicker';
+import GenderPicker from './GenderPicker';
 import editButtonImage from '../../assets/icons/edit-pencil.png';
 
 const UserInfoView = styled(View)`
@@ -104,7 +105,12 @@ const UserInfo = props => {
         />
         <UserInfoEditBlock
           label="Gender"
-          component={<ValueText>{props.gender}</ValueText>}
+          component={
+            <GenderPicker
+              gender={props.gender}
+              setGender={gender => props.updateFormField('gender', gender)}
+            />
+          }
         />
       </UserInfoView>
     );
