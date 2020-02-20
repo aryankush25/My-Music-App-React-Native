@@ -1,3 +1,5 @@
+import * as R from 'ramda';
+
 export const drawerNavigationObject = {
   home: {
     label: 'Home',
@@ -30,3 +32,7 @@ export const drawerNavigationObject = {
     iconName: 'settings'
   }
 };
+
+export const isNilOrEmpty = R.anyPass([R.isNil, R.isEmpty]);
+
+export const isPresent = R.complement(isNilOrEmpty);

@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Field } from 'react-redux';
+import { isPresent } from '../../utils/helper';
 import userDefaultImage from '../../assets/icons/user-male.png';
+import trashImage from '../../assets/icons/trash-white.png';
+import uploadImage from '../../assets/icons/upload-white.png';
 
 const ImageNameView = styled(View)`
   align-items: center;
@@ -9,13 +13,34 @@ const ImageNameView = styled(View)`
   padding-bottom: 10px;
 `;
 
+const UserImageView = styled(View)`
+  margin: 10px;
+  position: relative;
+`;
+
 const UserDefaultImage = styled(Image)`
   height: 200px;
   width: 200px;
   background-color: white;
   border-radius: 10;
-  border-color: #ffffff;
-  margin: 10px;
+`;
+
+const ImageActionsButtonWrapper = styled(View)`
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: -8;
+  right: -8;
+  background-color: #fe2851;
+  border-radius: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ImageActionsButton = styled(Image)`
+  height: 18px;
+  width: 18px;
 `;
 
 const NameText = styled(Text)`
@@ -26,11 +51,40 @@ const NameText = styled(Text)`
   font-family: Georgia-Italic;
 `;
 
+const ImageActionButton = props => {
+  return (
+    <ImageActionsButtonWrapper>
+      <TouchableOpacity
+        onPress={() =>
+          props.imageButtonAction(
+            isPresent(props.photoURL) ? 'deleteMode' : 'uploadMode'
+          )
+        }>
+        <ImageActionsButton
+          source={isPresent(props.photoURL) ? trashImage : uploadImage}
+        />
+      </TouchableOpacity>
+    </ImageActionsButtonWrapper>
+  );
+};
+
 const UserNameImage = props => {
   return (
     <ImageNameView>
-      <UserDefaultImage source={props.photoURL || userDefaultImage} />
-      <NameText>{props.displayName}</NameText>
+      <UserImageView>
+        <UserDefaultImage
+          source={isPresent(props.photoURL) ? props.photoURL : userDefaultImage}
+        />
+
+        {props.isEditingModeEnable && (
+          <ImageActionButton
+            photoURL={props.photoURL}
+            imageButtonAction={props.imageButtonAction}
+          />
+        )}
+      </UserImageView>
+
+      {!props.isEditingModeEnable && <NameText>{props.displayName}</NameText>}
     </ImageNameView>
   );
 };
