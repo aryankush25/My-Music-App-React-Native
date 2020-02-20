@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import * as R from 'ramda';
 import { useSelector, useDispatch } from 'react-redux';
-import { reduxForm, initialize } from 'redux-form';
+import { reduxForm, initialize, change } from 'redux-form';
+import ImagePicker from 'react-native-image-picker';
 import ScreenContainer from '../../containers/ScreenContainer';
 import Header from '../../components/SharedComponents/Header';
 import UserInfo from './UserInfo';
@@ -12,6 +13,14 @@ import editButtonImage from '../../assets/icons/edit-pencil.png';
 import CustomButton from '../../components/SharedComponents/CustomButton';
 
 const MY_PROFILE_FORM = 'myProfileForm';
+const options = {
+  title: 'Select Avatar',
+  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 const EditButton = styled(TouchableOpacity)`
   border-radius: 100;
@@ -41,6 +50,9 @@ const ProfileScreen = props => {
 
   const { displayName, photoURL, email, phoneNumber } = values;
 
+  const updateFormField = (key, value) =>
+    dispatch(change(MY_PROFILE_FORM, key, value));
+
   return (
     <ScreenContainer center={false}>
       <SafeAreaView />
@@ -61,7 +73,35 @@ const ProfileScreen = props => {
         displayName={displayName}
         isEditingModeEnable={isEditingModeEnable}
         imageButtonAction={mode => {
-          console.log('#### mode', mode);
+          let data = null;
+
+          if (mode === 'uploadMode') {
+            ImagePicker.showImagePicker(options, response => {
+              console.log('Response = ', response);
+
+              if (response.didCancel) {
+                console.log('User cancelled image picker');
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                console.log(
+                  'User tapped custom button: ',
+                  response.customButton
+                );
+              } else {
+                // const source = { uri: response.uri };
+
+                // You can also display the image using data:
+                const source = {
+                  uri: 'data:image/jpeg;base64,' + response.data
+                };
+
+                data = source;
+              }
+            });
+          }
+
+          updateFormField('photoURL', data);
         }}
       />
 
