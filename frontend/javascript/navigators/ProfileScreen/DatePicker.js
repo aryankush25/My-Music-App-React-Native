@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { View, Text, Platform, TouchableOpacity, Modal } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import { isPresent } from '../../utils/helper';
 
 const ValueText = styled(Text)`
@@ -97,7 +98,9 @@ const DatePicker = props => {
     }
   };
 
-  const value = isPresent(date) ? `${date}` : 'Select Date';
+  const value = isPresent(date)
+    ? `${moment(date).format('Do MMM YYYY')}`
+    : 'Select Date';
 
   return (
     <View>
