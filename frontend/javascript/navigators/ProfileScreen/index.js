@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { SafeAreaView, Image, TouchableOpacity, View } from 'react-native';
 import * as R from 'ramda';
@@ -62,22 +62,64 @@ const ProfileScreen = props => {
     gender
   } = values;
 
-  const updateFormField = (key, value) =>
-    dispatch(change(MY_PROFILE_FORM, key, value));
+  const goBack = useCallback(() => {
+    if (isEditingModeEnable) {
+      setIsEditingModeOnEnable(false);
+      props.reset();
+    } else {
+      props.navigation.goBack();
+    }
+  }, [isEditingModeEnable]);
+
+  const updateFormField = useCallback(
+    (key, value) => dispatch(change(MY_PROFILE_FORM, key, value)),
+    []
+  );
+
+  const imageSelectionHandler = useCallback(
+    mode => {
+      if (mode === 'uploadMode') {
+        ImagePicker.showImagePicker(
+          {
+            title: 'Select Avatar',
+            storageOptions: {
+              skipBackup: true,
+              path: 'images'
+            }
+          },
+          response => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else {
+              const source = {
+                type: response.type,
+                uri: 'data:image/jpeg;base64,' + response.data,
+                fileName: isPresent(response.fileName)
+                  ? response.fileName
+                  : 'My Avatar'
+              };
+
+              updateFormField('photoURL', source);
+            }
+          }
+        );
+      } else {
+        updateFormField('photoURL', null);
+      }
+    },
+    [updateFormField]
+  );
 
   return (
     <ScreenContainer center={false}>
       <SafeAreaView />
       <Header
         title="My Profile"
-        onPressHandler={() => {
-          if (isEditingModeEnable) {
-            setIsEditingModeOnEnable(false);
-            props.reset();
-          } else {
-            props.navigation.goBack();
-          }
-        }}
+        onPressHandler={goBack}
         rightComponent={
           !isEditingModeEnable && (
             <EditButton onPress={() => setIsEditingModeOnEnable(true)}>
@@ -92,40 +134,7 @@ const ProfileScreen = props => {
           photoURL={photoURL}
           displayName={displayName}
           isEditingModeEnable={isEditingModeEnable}
-          imageButtonAction={mode => {
-            if (mode === 'uploadMode') {
-              ImagePicker.showImagePicker(
-                {
-                  title: 'Select Avatar',
-                  storageOptions: {
-                    skipBackup: true,
-                    path: 'images'
-                  }
-                },
-                response => {
-                  console.log('Response = ', response);
-
-                  if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                  } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                  } else {
-                    const source = {
-                      type: response.type,
-                      uri: 'data:image/jpeg;base64,' + response.data,
-                      fileName: isPresent(response.fileName)
-                        ? response.fileName
-                        : 'My Avatar'
-                    };
-
-                    updateFormField('photoURL', source);
-                  }
-                }
-              );
-            } else {
-              updateFormField('photoURL', null);
-            }
-          }}
+          imageButtonAction={imageSelectionHandler}
         />
 
         <UserInfo

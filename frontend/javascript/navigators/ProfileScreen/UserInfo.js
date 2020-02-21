@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { View, Text, Image, TextInput } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { Field } from 'redux-form';
 import DatePicker from './DatePicker';
 import GenderPicker from './GenderPicker';

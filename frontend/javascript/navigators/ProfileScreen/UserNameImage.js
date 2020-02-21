@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Field } from 'react-redux';
 import { isPresent } from '../../utils/helper';
 import userDefaultImage from '../../assets/icons/user-male.png';
 import trashImage from '../../assets/icons/trash-white.png';
@@ -52,16 +51,21 @@ const NameText = styled(Text)`
 `;
 
 const ImageActionButton = props => {
+  const { photoURL } = props;
+
+  const imageButtonAction = useCallback(
+    () =>
+      props.imageButtonAction(
+        isPresent(photoURL) ? 'deleteMode' : 'uploadMode'
+      ),
+    [photoURL]
+  );
+
   return (
     <ImageActionsButtonWrapper>
-      <TouchableOpacity
-        onPress={() =>
-          props.imageButtonAction(
-            isPresent(props.photoURL) ? 'deleteMode' : 'uploadMode'
-          )
-        }>
+      <TouchableOpacity onPress={imageButtonAction}>
         <ImageActionsButton
-          source={isPresent(props.photoURL) ? trashImage : uploadImage}
+          source={isPresent(photoURL) ? trashImage : uploadImage}
         />
       </TouchableOpacity>
     </ImageActionsButtonWrapper>
