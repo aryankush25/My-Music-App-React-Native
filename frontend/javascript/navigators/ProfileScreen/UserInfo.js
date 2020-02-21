@@ -7,23 +7,39 @@ import GenderPicker from './GenderPicker';
 import CustomTextInput from '../../components/SharedComponents/CustomTextInput';
 import editButtonImage from '../../assets/icons/edit-pencil.png';
 import { isPresent } from '../../utils/helper';
+import { required, email } from '../../utils/validations';
 
 const UserInfoView = styled(View)`
   padding: 30px 30px;
   align-items: flex-start;
 `;
 
+const wrapperCustomStyles = css`
+  border-bottom-width: 1;
+  border-bottom-color: #bfbfbf;
+  padding: 0 0 5px 0;
+  margin: 0;
+`;
+
+const textInputWrapperCustomStyles = css`
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  height: 18;
+  padding: 0;
+`;
+
+const errosCustomStyles = css`
+  color: red;
+  font-size: 12;
+  position: absolute;
+`;
+
 const UserInfoBlockContainer = styled(View)`
+  ${props => props.withBottomBorder && wrapperCustomStyles};
   display: flex;
-  margin: 10px 0;
   width: 100%;
-  ${props =>
-    props.withBottomBorder &&
-    css`
-      border-bottom-width: 1;
-      border-bottom-color: #bfbfbf;
-      padding-bottom: 5px;
-    `}
+  margin: 10px 0;
 `;
 
 const LabelText = styled(Text)`
@@ -58,14 +74,6 @@ const EditImage = styled(Image)`
   margin-bottom: 3px;
 `;
 
-const textInputWrapperCustomStyles = css`
-  font-size: 14px;
-  color: white;
-  font-weight: bold;
-  height: 18;
-  padding: 0;
-`;
-
 const UserInfoBlock = ({ label, value }) => {
   return (
     <UserInfoBlockContainer>
@@ -78,7 +86,7 @@ const UserInfoBlock = ({ label, value }) => {
 
 const UserInfoEditBlock = props => {
   return (
-    <UserInfoBlockContainer withBottomBorder>
+    <UserInfoBlockContainer withBottomBorder={props.withBottomBorder}>
       <LableEditView>
         <LabelText>{props.label}</LabelText>
         <EditImage source={editButtonImage} />
@@ -93,7 +101,14 @@ const UserInfoEditBlock = props => {
             value={props.value}
             placeholder={props.placeholder}
             noWrapper
+            autoCapitalize={props.autoCapitalize}
+            keyboardType={props.keyboardType}
+            maxLength={props.maxLength}
+            returnKeyType={props.returnKeyType}
+            validate={props.validate}
             customStyles={textInputWrapperCustomStyles}
+            wrapperCustomStyles={wrapperCustomStyles}
+            errosCustomStyles={errosCustomStyles}
           />
         )}
       </View>
@@ -110,18 +125,28 @@ const UserInfo = props => {
           name="displayName"
           value={props.displayName}
           placeholder="Enter Name"
+          autoCapitalize="words"
+          keyboardType="default"
+          validate={[required]}
         />
         <UserInfoEditBlock
           label="Email"
           name="email"
           value={props.email}
           placeholder="Enter Email"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          validate={[required, email]}
         />
         <UserInfoEditBlock
           label="Phone Number"
           name="phoneNumber"
           value={props.phoneNumber}
           placeholder="Enter Phone Number"
+          autoCapitalize="none"
+          keyboardType="number-pad"
+          maxLength={10}
+          returnKeyType="done"
         />
         <UserInfoEditBlock
           label="Birthday"
@@ -131,6 +156,7 @@ const UserInfo = props => {
               setDate={date => props.updateFormField('birthday', date)}
             />
           }
+          withBottomBorder
         />
         <UserInfoEditBlock
           label="Gender"
@@ -140,6 +166,7 @@ const UserInfo = props => {
               setGender={gender => props.updateFormField('gender', gender)}
             />
           }
+          withBottomBorder
         />
       </UserInfoView>
     );

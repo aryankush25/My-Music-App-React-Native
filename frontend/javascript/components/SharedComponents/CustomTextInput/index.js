@@ -3,15 +3,13 @@ import { View, TextInput, Text } from 'react-native';
 import styled, { css } from 'styled-components';
 
 const MyTextInputWrapper = styled(View)`
-  ${props =>
-    !props.noWrapper &&
-    css`
-      width: 100%;
-      border-bottom-width: 2;
-      border-bottom-color: #bfbfbf;
-      padding: 12px 6px;
-      margin-bottom: 10px;
-    `}
+  width: 100%;
+  border-bottom-width: 2;
+  border-bottom-color: #bfbfbf;
+  padding: 12px 6px;
+  margin-bottom: 10px;
+
+  ${props => props.customStyles}
 `;
 
 const TextInputWrapper = styled(TextInput)`
@@ -26,11 +24,14 @@ const TextInputWrapper = styled(TextInput)`
 const Errors = styled(View)`
   width: 100%;
   align-items: flex-end;
+  position: relative;
 `;
 
 const ErrorMessage = styled(Text)`
   color: red;
   font-size: 14;
+
+  ${props => props.customStyles}
 `;
 
 const MyTextInput = ({
@@ -42,7 +43,7 @@ const MyTextInput = ({
 }) => {
   return (
     <React.Fragment>
-      <MyTextInputWrapper noWrapper={inputProps.noWrapper}>
+      <MyTextInputWrapper customStyles={inputProps.wrapperCustomStyles}>
         <TextInputWrapper
           {...inputProps}
           onChangeText={input.onChange}
@@ -54,8 +55,16 @@ const MyTextInput = ({
       </MyTextInputWrapper>
       <Errors>
         {touched &&
-          ((error && <ErrorMessage>{error}</ErrorMessage>) ||
-            (warning && <ErrorMessage>{warning}</ErrorMessage>))}
+          ((error && (
+            <ErrorMessage customStyles={inputProps.errosCustomStyles}>
+              {error}
+            </ErrorMessage>
+          )) ||
+            (warning && (
+              <ErrorMessage customStyles={inputProps.errosCustomStyles}>
+                {warning}
+              </ErrorMessage>
+            )))}
       </Errors>
     </React.Fragment>
   );

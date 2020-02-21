@@ -136,7 +136,7 @@ const ProfileScreen = props => {
         <CustomButton
           onPress={props.handleSubmit}
           label="Save"
-          disabled={false}
+          disabled={props.submitting || !props.valid}
         />
       )}
     </ScreenContainer>
@@ -147,8 +147,5 @@ export default reduxForm({
   form: MY_PROFILE_FORM,
   onSubmit: (values, dispatch) => {
     console.log('My Profile Values', values);
-  },
-  forceUnregisterOnUnmount: true,
-  enableReinitialize: true,
-  destroyOnUnmount: false
+  }
 })(ProfileScreen);
