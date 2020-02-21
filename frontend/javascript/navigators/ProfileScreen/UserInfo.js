@@ -10,7 +10,7 @@ import { isPresent } from '../../utils/helper';
 import { required, email } from '../../utils/validations';
 
 const UserInfoView = styled(View)`
-  padding: 30px 30px;
+  padding: 30px;
   align-items: flex-start;
 `;
 

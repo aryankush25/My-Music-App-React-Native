@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Image, TouchableOpacity, View } from 'react-native';
 import * as R from 'ramda';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, initialize, change } from 'redux-form';
@@ -9,9 +9,10 @@ import ScreenContainer from '../../containers/ScreenContainer';
 import Header from '../../components/SharedComponents/Header';
 import UserInfo from './UserInfo';
 import UserNameImage from './UserNameImage';
-import editButtonImage from '../../assets/icons/edit-pencil.png';
 import CustomButton from '../../components/SharedComponents/CustomButton';
+import KeyboardAvoidingScrollView from '../../containers/KeyboardAvoidingScrollView';
 import { isPresent } from '../../utils/helper';
+import editButtonImage from '../../assets/icons/edit-pencil.png';
 
 const MY_PROFILE_FORM = 'myProfileForm';
 
@@ -23,6 +24,10 @@ const EditButton = styled(TouchableOpacity)`
 const EditButtonImage = styled(Image)`
   height: 20px;
   width: 20px;
+`;
+
+const SaveButtonView = styled(View)`
+  margin-bottom: 30px;
 `;
 
 const ProfileScreen = props => {
@@ -82,63 +87,67 @@ const ProfileScreen = props => {
         }
       />
 
-      <UserNameImage
-        photoURL={photoURL}
-        displayName={displayName}
-        isEditingModeEnable={isEditingModeEnable}
-        imageButtonAction={mode => {
-          if (mode === 'uploadMode') {
-            ImagePicker.showImagePicker(
-              {
-                title: 'Select Avatar',
-                storageOptions: {
-                  skipBackup: true,
-                  path: 'images'
+      <KeyboardAvoidingScrollView>
+        <UserNameImage
+          photoURL={photoURL}
+          displayName={displayName}
+          isEditingModeEnable={isEditingModeEnable}
+          imageButtonAction={mode => {
+            if (mode === 'uploadMode') {
+              ImagePicker.showImagePicker(
+                {
+                  title: 'Select Avatar',
+                  storageOptions: {
+                    skipBackup: true,
+                    path: 'images'
+                  }
+                },
+                response => {
+                  console.log('Response = ', response);
+
+                  if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                  } else if (response.error) {
+                    console.log('ImagePicker Error: ', response.error);
+                  } else {
+                    const source = {
+                      type: response.type,
+                      uri: 'data:image/jpeg;base64,' + response.data,
+                      fileName: isPresent(response.fileName)
+                        ? response.fileName
+                        : 'My Avatar'
+                    };
+
+                    updateFormField('photoURL', source);
+                  }
                 }
-              },
-              response => {
-                console.log('Response = ', response);
-
-                if (response.didCancel) {
-                  console.log('User cancelled image picker');
-                } else if (response.error) {
-                  console.log('ImagePicker Error: ', response.error);
-                } else {
-                  const source = {
-                    type: response.type,
-                    uri: 'data:image/jpeg;base64,' + response.data,
-                    fileName: isPresent(response.fileName)
-                      ? response.fileName
-                      : 'My Avatar'
-                  };
-
-                  updateFormField('photoURL', source);
-                }
-              }
-            );
-          } else {
-            updateFormField('photoURL', null);
-          }
-        }}
-      />
-
-      <UserInfo
-        displayName={displayName}
-        email={email}
-        phoneNumber={phoneNumber}
-        birthday={birthday}
-        gender={gender}
-        isEditingModeEnable={isEditingModeEnable}
-        updateFormField={updateFormField}
-      />
-
-      {isEditingModeEnable && (
-        <CustomButton
-          onPress={props.handleSubmit}
-          label="Save"
-          disabled={props.submitting || !props.valid}
+              );
+            } else {
+              updateFormField('photoURL', null);
+            }
+          }}
         />
-      )}
+
+        <UserInfo
+          displayName={displayName}
+          email={email}
+          phoneNumber={phoneNumber}
+          birthday={birthday}
+          gender={gender}
+          isEditingModeEnable={isEditingModeEnable}
+          updateFormField={updateFormField}
+        />
+
+        {isEditingModeEnable && (
+          <SaveButtonView>
+            <CustomButton
+              onPress={props.handleSubmit}
+              label="Save"
+              disabled={props.submitting || !props.valid}
+            />
+          </SaveButtonView>
+        )}
+      </KeyboardAvoidingScrollView>
     </ScreenContainer>
   );
 };
