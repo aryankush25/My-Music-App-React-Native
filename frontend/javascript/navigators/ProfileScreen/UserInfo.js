@@ -89,7 +89,7 @@ const UserInfoEditBlock = props => {
     <UserInfoBlockContainer withBottomBorder={props.withBottomBorder}>
       <LableEditView>
         <LabelText>{props.label}</LabelText>
-        <EditImage source={editButtonImage} />
+        {props.editable !== false && <EditImage source={editButtonImage} />}
       </LableEditView>
       <View>
         {isPresent(props.component) ? (
@@ -106,6 +106,7 @@ const UserInfoEditBlock = props => {
             maxLength={props.maxLength}
             returnKeyType={props.returnKeyType}
             validate={props.validate}
+            editable={props.editable}
             customStyles={textInputWrapperCustomStyles}
             wrapperCustomStyles={wrapperCustomStyles}
             errosCustomStyles={errosCustomStyles}
@@ -137,6 +138,7 @@ const UserInfo = props => {
           autoCapitalize="none"
           keyboardType="email-address"
           validate={[required, email]}
+          editable={false}
         />
         <UserInfoEditBlock
           label="Phone Number"

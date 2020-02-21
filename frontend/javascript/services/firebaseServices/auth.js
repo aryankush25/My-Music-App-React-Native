@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { isPresent, isNilOrEmpty } from '../../utils/helper';
 
 export const fetchCurrentUser = async () => {
   const currentUser = await firebase.auth().currentUser;
@@ -30,8 +31,20 @@ export const signOutUser = async () => {
 };
 
 export const updateUser = async updatedData => {
+  const { displayName, photoURL, email } = updatedData;
+
   const currentUser = await fetchCurrentUser();
-  await currentUser.updateProfile(updatedData);
+  if (isPresent(displayName) || isPresent(photoURL)) {
+    await currentUser.updateProfile({
+      displayName: displayName,
+      photoURL: photoURL || currentUser.photoURL
+    });
+  }
+
+  if (isPresent(email)) {
+    await currentUser.updateEmail(email);
+  }
+
   const newCurrentUser = await fetchCurrentUser();
   return newCurrentUser;
 };

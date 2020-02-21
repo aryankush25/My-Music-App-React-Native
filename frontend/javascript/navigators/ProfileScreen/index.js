@@ -165,5 +165,6 @@ export default reduxForm({
   form: MY_PROFILE_FORM,
   onSubmit: (values, dispatch) => {
     console.log('My Profile Values', values);
+    dispatch({ type: 'UPDATE_PROFILE_REQUEST', values });
   }
 })(ProfileScreen);
